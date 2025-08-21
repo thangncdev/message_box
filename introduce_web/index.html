@@ -3,33 +3,126 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Message Box - Lời nhắc tích cực mỗi ngày</title>
+  <title>Message Box - Nhắc nhở tích cực mỗi ngày</title>
   <link rel="stylesheet" href="style.css">
+
+  <!-- Import font cute -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
+  <!-- Header / Hero -->
   <header>
-    <h1>Message Box</h1>
-    <p>Lời nhắc tích cực luôn hiện diện trên màn hình chính của bạn</p>
+    <div class="container">
+      <div class="lang-switch">
+        <img src="images/vn.png" alt="VN" id="vi-btn" class="active">
+        <img src="images/uk.png" alt="EN" id="en-btn">
+      </div>
+      <div class="hero-text">
+        <h1 class="vi"><img class="hero-logo" src="images/logo_message_box.png" alt="Message Box logo"> Message Box</h1>
+        <h1 class="en" style="display:none;"><img class="hero-logo" src="images/logo_message_box.png" alt="Message Box logo"> Message Box</h1>
+        <p class="vi">Một cách dễ dàng để nhìn thấy những lời nhắc tích cực mỗi ngày ngay trên màn hình chính. Message Box giúp bạn luôn giữ tinh thần lạc quan, nhắc nhở mục tiêu quan trọng và truyền động lực để bạn hoàn thành những việc mình muốn.</p>
+        <p class="en" style="display:none;">An easy way to see positive reminders every day right on your home screen. Message Box keeps your spirit optimistic, reminds you of important goals, and motivates you to accomplish what you want.</p>
+        <a href="#" class="download-btn vi">Tải xuống iOS</a>
+        <a href="#" class="download-btn en" style="display:none;">Download iOS</a>
+        <a href="#" class="download-btn vi">Tải xuống Android</a>
+        <a href="#" class="download-btn en" style="display:none;">Download Android</a>
+      </div>
+      <!-- <div class="hero-img">
+        <img src="image.png" alt="App preview">
+      </div> -->
+      <section class="image-marquee">
+        <div class="container">
+          <div class="marquee">
+            <div class="marquee-track">
+              <ul class="marquee-content">
+                <li><img src="images/image_1.png" alt="Love"></li>
+                <li><img src="images/image_2.png" alt="Goal"></li>
+                <li><img src="images/image_3.png" alt="Motivation"></li>
+                <li><img src="images/image_4.png" alt="Privacy"></li>
+                <li><img src="images/image_5.png" alt="Vietnam"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   </header>
 
+
+  <!-- Features Section -->
   <section class="features">
-    <h2>Tính năng nổi bật</h2>
-    <ul>
-      <li>Hiển thị lời nhắc tích cực trên widget</li>
-      <li>Nhắc nhở mục tiêu quan trọng hàng ngày</li>
-      <li>Động viên bản thân mỗi khi mở điện thoại</li>
-      <li>Dễ dàng thêm lời nhắc cá nhân</li>
-    </ul>
+    <div class="container">
+      <h2 class="vi">Tính năng nổi bật</h2>
+      <h2 class="en" style="display:none;">Key Features</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <img src="images/love.png" alt="widget">
+          <h3 class="vi">Widget tích cực</h3>
+          <h3 class="en" style="display:none;">Positive Widget</h3>
+          <p class="vi">Những lời nhắc tích cực luôn xuất hiện trên màn hình chính, ngay cả khi bạn không mở ứng dụng. Bạn sẽ luôn nhìn thấy các câu nói truyền cảm hứng và nhắc nhở về những điều quan trọng.</p>
+          <p class="en" style="display:none;">Positive reminders always appear on your home screen, even without opening the app. You will always see inspiring messages and reminders of important things.</p>
+        </div>
+        <div class="feature-card">
+          <img src="images/goal.png" alt="goals">
+          <h3 class="vi">Nhắc mục tiêu</h3>
+          <h3 class="en" style="display:none;">Goal Reminder</h3>
+          <p class="vi">Ứng dụng giúp bạn ghi nhớ và tập trung vào các mục tiêu quan trọng hàng ngày. Không còn quên việc cần làm, giúp bạn quản lý thời gian và năng lượng hiệu quả hơn.</p>
+          <p class="en" style="display:none;">The app helps you remember and focus on important daily goals. No more forgetting tasks, helping you manage time and energy more effectively.</p>
+        </div>
+        <div class="feature-card">
+          <img src="images/motivation.png" alt="motivation">
+          <h3 class="vi">Động viên bản thân</h3>
+          <h3 class="en" style="display:none;">Self Motivation</h3>
+          <p class="vi">Mỗi câu nhắc nhở được thiết kế để truyền năng lượng tích cực, khích lệ bạn vượt qua khó khăn, giữ tinh thần lạc quan và tin vào bản thân.</p>
+          <p class="en" style="display:none;">Each reminder is designed to deliver positive energy, encourage you to overcome difficulties, maintain optimism, and believe in yourself.</p>
+        </div>
+        <div class="feature-card">
+          <img src="images/security.png" alt="personal">
+          <h3 class="vi">Quyền riêng tư</h3>
+          <h3 class="en" style="display:none;">Privacy & Transparency</h3>
+          <p class="vi">Message Box cam kết không xâm phạm quyền riêng tư. Tất cả dữ liệu cá nhân được lưu trữ hoàn toàn trên thiết bị của bạn, Message Box không thu thập dữ liệu cá nhân. Mã nguồn ứng dụng hoàn toàn công khai, bạn có thể tự do kiểm tra và xác minh.</p>
+          <p class="en" style="display:none;">Message Box is committed to not invading your privacy. All reminders and personal information are stored entirely on your device, Message Box does not collect personal data. The application source code is completely public, you can freely check and verify.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section class="cta">
-    <h2>Tải ứng dụng ngay</h2>
-    <a href="#" class="download-btn">Tải xuống cho iOS</a>
-    <a href="#" class="download-btn">Tải xuống cho Android</a>
+  <!-- Benefits Section (Mới) -->
+  <!-- Benefits Section -->
+<section class="benefits">
+    <div class="container">
+      <h2 class="vi">Lợi ích & Giới thiệu Message Box</h2>
+      <h2 class="en" style="display:none;">Benefits & About Message Box</h2>
+      <ul class="benefit-list">
+        <li class="vi">Bạn từng muốn gửi cho chính mình một lời nhắc nhở quan trọng, hoặc cần một chút động lực để vượt qua những ngày căng thẳng? <strong>Message Box</strong> sẽ là người bạn đồng hành nhỏ bé nhưng hữu ích ngay trên chiếc điện thoại của bạn.</li>
+        <li class="en" style="display:none;">Have you ever wanted to leave yourself an important reminder, or needed a little boost to get through stressful days? <strong>Message Box</strong> is your small but helpful companion right on your phone.</li>
+  
+        <li class="vi">Một hộp thoại tinh tế hiển thị ngay trên màn hình chính, nhắc nhở bạn thường xuyên về những điều quan trọng, truyền năng lượng tích cực mỗi ngày.</li>
+        <li class="en" style="display:none;">A subtle popup appears on your home screen, gently reminding you of important things and bringing daily positive energy.</li>
+  
+        <li class="vi">Bạn có thể dễ dàng thêm mới, chỉnh sửa hoặc cá nhân hóa những lời nhắn dành riêng cho mình. <strong>Message Box</strong> giúp bạn tự dẫn đường, luôn giữ bạn đi đúng hướng trên con đường của chính mình.</li>
+        <li class="en" style="display:none;">You can easily add, edit, or personalize reminders just for yourself. <strong>Message Box</strong> helps guide you, keeping you on track along your personal journey.</li>
+  
+        <li class="vi">Chúng tôi cam kết <strong>không thu thập dữ liệu cá nhân</strong> – mọi thông tin đều <strong>hoàn toàn riêng tư</strong>, và bạn có thể tự do tham khảo <strong>mã nguồn công khai</strong> của ứng dụng. <a href="https://github.com/thangncdev/message_box">Tại đây</a></li>
+        <li class="en" style="display:none;">We are committed to <strong>not collecting any personal data</strong> – all information stays <strong>completely private</strong>, and you are welcome to check the <strong>public source code</strong> of the app.</li>
+  
+        <li class="vi">Mong nhận được <strong>sự ủng hộ và góp ý</strong> từ bạn để hoàn thiện ứng dụng hơn nữa. Vui lòng liên hệ với mình qua email: <a href="mailto:thangnct110@gmail.com">thangnct110@gmail.com</a>.</li>
+        <li class="en" style="display:none;">I truly hope to receive your <strong>support and feedback</strong> to make the app even better. Please feel free to contact me via email: <a href="mailto:thangnct110@gmail.com">thangnct110@gmail.com</a>.</li>
+      </ul>
+    </div>
   </section>
 
+  <!-- Footer -->
   <footer>
-    <p>&copy; 2025 Message Box. Giữ vững tinh thần tích cực!</p>
+    <div class="container">
+      <p class="vi">&copy; 2025 Message Box. Keep your spirits high!</p>
+      <p class="en" style="display:none;">&copy; 2025 Message Box. Keep your spirits high!</p>
+    </div>
   </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
