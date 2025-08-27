@@ -1,89 +1,74 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:message_box/core/theme.dart';
+import 'package:message_box/domain/entities/message.dart';
+import 'package:message_box/presentation/providers.dart';
 import 'package:message_box/services/widget_service.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:message_box/l10n/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  WidgetService.init();
+  await Hive.initFlutter();
+  Hive.registerAdapter(MessageAdapter());
+  await Hive.openBox<Message>('messages');
+  await _seedIfFirstLaunch();
+  runApp(const ProviderScope(child: DearBoxApp()));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class DearBoxApp extends ConsumerWidget {
+  const DearBoxApp({super.key});
 
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+  Widget build(BuildContext context, WidgetRef ref) {
+    final GoRouter router = ref.watch(routerProvider);
+    final locale = ref.watch(currentLocaleProvider);
+    return MaterialApp.router(
+      onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
+      theme: buildAppTheme(),
+      routerConfig: router,
+      locale: locale,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [Locale('en'), Locale('vi')],
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetService.init();
+Future<void> _seedIfFirstLaunch() async {
+  final prefs = await SharedPreferences.getInstance();
+  final seeded = prefs.getBool('seeded') ?? false;
+  if (seeded) return;
+  final box = Hive.box<Message>('messages');
+  final now = DateTime.now().toUtc();
+  final samples = [
+    Message(
+      id: 'seed-1',
+      content: 'Chúc bạn một ngày thật an yên 🌿',
+      createdAt: now.subtract(const Duration(minutes: 5)),
+      pinned: true,
+    ),
+    Message(
+      id: 'seed-2',
+      content: 'Uống nước và vươn vai nha 💧',
+      createdAt: now.subtract(const Duration(minutes: 3)),
+    ),
+    Message(
+      id: 'seed-3',
+      content: 'Hít thở sâu, mọi chuyện sẽ ổn',
+      createdAt: now.subtract(const Duration(minutes: 1)),
+    ),
+  ];
+  for (final m in samples) {
+    await box.put(m.id, m);
   }
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-    WidgetService.addQuote(_counter.toString());
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-              style: TextStyle(fontFamily: 'ShantellSans'),
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-    );
-  }
+  await prefs.setBool('seeded', true);
 }

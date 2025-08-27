@@ -1,0 +1,79 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:message_box/core/utils/id.dart';
+import 'package:message_box/domain/entities/message.dart';
+import 'package:message_box/presentation/providers.dart';
+import 'package:message_box/services/widget_service.dart';
+
+class ComposeState {
+  final String content;
+  final String? error;
+
+  const ComposeState({this.content = '', this.error});
+
+  bool get canSave =>
+      content.trim().isNotEmpty && content.trim().runes.length <= 280;
+
+  ComposeState copyWith({String? content, String? error}) =>
+      ComposeState(content: content ?? this.content, error: error);
+}
+
+class ComposeController extends StateNotifier<ComposeState> {
+  final Ref ref;
+  ComposeController(this.ref) : super(const ComposeState());
+
+  void setContent(String value) {
+    String? error;
+    final trimmed = value.trim();
+    final length = trimmed.runes.length;
+    if (length == 0) error = 'Nội dung không được để trống';
+    if (length > 280) error = 'Tối đa 280 ký tự';
+    state = state.copyWith(content: value, error: error);
+  }
+
+  Future<void> saveNew() async {
+    final trimmed = state.content.trim();
+    if (trimmed.isEmpty || trimmed.runes.length > 280) return;
+    final now = DateTime.now().toUtc();
+    final message = Message(
+      id: generateId(),
+      content: trimmed,
+      createdAt: now,
+      updatedAt: null,
+      pinned: false,
+    );
+    await ref.read(createMessageProvider).call(message);
+    ref.read(refreshTickProvider.notifier).state++;
+    await _updateHomeWidget();
+  }
+
+  Future<void> saveEdit(String id) async {
+    final existing = await ref.read(getMessageProvider).call(id);
+    if (existing == null) return;
+    final trimmed = state.content.trim();
+    if (trimmed.isEmpty || trimmed.runes.length > 280) return;
+    final updated = existing.copyWith(
+      content: trimmed,
+      updatedAt: DateTime.now().toUtc(),
+    );
+    await ref.read(updateMessageProvider).call(updated);
+    ref.read(refreshTickProvider.notifier).state++;
+    await _updateHomeWidget();
+  }
+
+  Future<void> _updateHomeWidget() async {
+    final mode = ref.read(widgetModeProvider);
+    final featured = mode == 'random'
+        ? await ref.read(randomMessageProvider).call()
+        : await ref.read(latestMessageProvider).call();
+    await WidgetService.saveWidgetState(mode: mode);
+    await WidgetService.updateWidget(
+      messageId: featured?.id,
+      content: featured?.content ?? 'No message yet. Open DearBox.',
+    );
+  }
+}
+
+final composeControllerProvider =
+    StateNotifierProvider<ComposeController, ComposeState>((ref) {
+      return ComposeController(ref);
+    });
