@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:message_box/domain/entities/message.dart';
 import 'package:message_box/presentation/providers.dart';
 import 'package:message_box/presentation/widgets/empty_state.dart';
+import 'package:message_box/core/theme.dart';
 
 class FeaturedSection extends ConsumerWidget {
   const FeaturedSection({super.key});
@@ -38,46 +39,50 @@ class _PinnedDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Container(
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFF7C83FD), Color(0xFF96BAFF)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+    final palette = theme.extension<PastelPalette>();
+    return Material(
+      color: Colors.transparent,
+      child: Container(
+        decoration: BoxDecoration(
+          color: (palette?.pinnedBg) ?? const Color(0xFFFFF2C6),
+          borderRadius: BorderRadius.circular(24),
+          border: Border.all(
+            color: (palette?.borderColor) ?? const Color(0x14000000),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.06),
+              blurRadius: 16,
+              offset: const Offset(0, 10),
+            ),
+          ],
         ),
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.08),
-            blurRadius: 14,
-            offset: const Offset(0, 6),
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.all(20),
-      child: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(right: 28),
-            child: Text(
-              message.content,
-              style: theme.textTheme.titleMedium?.copyWith(
-                color: Colors.white,
-                height: 1.35,
-                fontSize: 18,
+        padding: const EdgeInsets.all(20),
+        child: Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                message.content,
+                style: theme.textTheme.titleMedium?.copyWith(
+                  color: (palette?.onCard) ?? Color(0xFF3E3A52),
+                  height: 1.35,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                ),
+                maxLines: 4,
+                overflow: TextOverflow.ellipsis,
               ),
-            ),
+              const SizedBox(height: 6),
+              Text(
+                'Pinned',
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: palette?.accent,
+                ),
+              ),
+            ],
           ),
-          Positioned(
-            top: 0,
-            right: 0,
-            child: Icon(
-              Icons.push_pin,
-              size: 20,
-              color: Colors.white.withOpacity(0.9),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

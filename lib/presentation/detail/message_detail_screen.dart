@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:message_box/core/utils/date_format.dart';
 import 'package:message_box/l10n/app_localizations.dart';
+import 'package:message_box/presentation/home/home_controller.dart';
 import 'package:message_box/presentation/providers.dart';
 
 class MessageDetailScreen extends ConsumerWidget {
@@ -47,25 +48,21 @@ class MessageDetailScreen extends ConsumerWidget {
                 onPressed: m == null
                     ? null
                     : () async {
-                        final willPin = !(m.pinned);
-                        await ref
-                            .read(updateMessageProvider)
-                            .call(
-                              m.copyWith(
-                                pinned: willPin,
-                                updatedAt: DateTime.now().toUtc(),
+                        if (!(m.pinned)) {
+                          await ref
+                              .read(homeControllerProvider.notifier)
+                              .onPinToggle(m.id);
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  AppLocalizations.of(context)!.pinned,
+                                ),
                               ),
                             );
-                        if (context.mounted) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                willPin
-                                    ? AppLocalizations.of(context)!.pinned
-                                    : AppLocalizations.of(context)!.unpinned,
-                              ),
-                            ),
-                          );
+                          }
+
+                          context.pop();
                         }
                       },
               ),

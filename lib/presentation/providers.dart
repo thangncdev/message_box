@@ -13,6 +13,7 @@ import 'package:message_box/domain/usecases/latest_message.dart';
 import 'package:message_box/domain/usecases/list_messages.dart';
 import 'package:message_box/domain/usecases/random_message.dart';
 import 'package:message_box/domain/usecases/update_message.dart';
+import 'package:message_box/core/theme.dart';
 
 // Router provider
 final routerProvider = appRouterProvider;
@@ -87,3 +88,8 @@ final messagesStreamProvider = StreamProvider<List<Message>>((ref) async* {
 
 // Locale provider (null = follow system)
 final currentLocaleProvider = StateProvider<Locale?>((ref) => null);
+
+// Theme provider (key from availableThemes)
+final currentThemeKeyProvider = StateProvider<String>(
+  (ref) => AppThemeKeys.lavender,
+);

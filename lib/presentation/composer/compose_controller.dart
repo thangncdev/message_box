@@ -43,7 +43,7 @@ class ComposeController extends StateNotifier<ComposeState> {
     );
     await ref.read(createMessageProvider).call(message);
     ref.read(refreshTickProvider.notifier).state++;
-    await _updateHomeWidget();
+    await WidgetService.updateWidget(content: trimmed);
   }
 
   Future<void> saveEdit(String id) async {
@@ -57,19 +57,7 @@ class ComposeController extends StateNotifier<ComposeState> {
     );
     await ref.read(updateMessageProvider).call(updated);
     ref.read(refreshTickProvider.notifier).state++;
-    await _updateHomeWidget();
-  }
-
-  Future<void> _updateHomeWidget() async {
-    final mode = ref.read(widgetModeProvider);
-    final featured = mode == 'random'
-        ? await ref.read(randomMessageProvider).call()
-        : await ref.read(latestMessageProvider).call();
-    await WidgetService.saveWidgetState(mode: mode);
-    await WidgetService.updateWidget(
-      messageId: featured?.id,
-      content: featured?.content ?? 'No message yet. Open DearBox.',
-    );
+    await WidgetService.updateWidget(content: trimmed);
   }
 }
 

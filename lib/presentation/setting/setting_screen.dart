@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:message_box/l10n/app_localizations.dart';
 import 'package:message_box/presentation/providers.dart';
+import 'package:message_box/core/theme.dart';
 
 class SettingScreen extends ConsumerWidget {
   const SettingScreen({super.key});
@@ -40,6 +41,22 @@ class SettingScreen extends ConsumerWidget {
                 ref.read(currentLocaleProvider.notifier).state = const Locale(
                   'vi',
                 );
+              }
+            },
+            decoration: const InputDecoration(border: OutlineInputBorder()),
+          ),
+          const SizedBox(height: 24),
+          Text('Theme', style: const TextStyle(fontWeight: FontWeight.w600)),
+          const SizedBox(height: 8),
+          DropdownButtonFormField<String>(
+            value: ref.watch(currentThemeKeyProvider),
+            items: [
+              for (final key in availableThemes)
+                DropdownMenuItem(value: key, child: Text(key)),
+            ],
+            onChanged: (v) {
+              if (v != null) {
+                ref.read(currentThemeKeyProvider.notifier).state = v;
               }
             },
             decoration: const InputDecoration(border: OutlineInputBorder()),
