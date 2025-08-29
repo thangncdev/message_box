@@ -94,7 +94,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		8FB391122E5704BA0001CB0D /* Exceptions for "MessageBox" folder in "MessageBoxExtension" target */ = {
+		8FB391122E5704BA0001CB0D /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -104,18 +104,7 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		8FB391012E5704B80001CB0D /* MessageBox */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				8FB391122E5704BA0001CB0D /* Exceptions for "MessageBox" folder in "MessageBoxExtension" target */,
-			);
-			explicitFileTypes = {
-			};
-			explicitFolders = (
-			);
-			path = MessageBox;
-			sourceTree = "<group>";
-		};
+		8FB391012E5704B80001CB0D /* MessageBox */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8FB391122E5704BA0001CB0D /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = MessageBox; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,7 +146,6 @@
 				29CDF8FC26E4E1BFA647611F /* Pods-RunnerTests.release.xcconfig */,
 				9157DB2C8A0B35D9108CE30F /* Pods-RunnerTests.profile.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -589,6 +577,7 @@
 				DEVELOPMENT_TEAM = FRK59XJWJ3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -674,7 +663,7 @@
 				INFOPLIST_FILE = MessageBox/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MessageBox;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -716,7 +705,7 @@
 				INFOPLIST_FILE = MessageBox/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MessageBox;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -755,7 +744,7 @@
 				INFOPLIST_FILE = MessageBox/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MessageBox;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -897,6 +886,7 @@
 				DEVELOPMENT_TEAM = FRK59XJWJ3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -924,6 +914,7 @@
 				DEVELOPMENT_TEAM = FRK59XJWJ3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

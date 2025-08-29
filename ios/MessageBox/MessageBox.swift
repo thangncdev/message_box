@@ -31,10 +31,6 @@ struct Provider: TimelineProvider {
         let timeline = Timeline(entries: [entry], policy: .atEnd)
         completion(timeline)
     }
-
-//    func relevances() async -> WidgetRelevances<Void> {
-//        // Generate a list containing the contexts this widget is relevant in.
-//    }
 }
 
 struct SimpleEntry: TimelineEntry {
@@ -64,11 +60,10 @@ struct MessageBoxEntryView : View {
     }
     
     var body: some View {
-        
-                VStack {
-                    Text(entry.text).font(Font.custom("ShantellSans-Regular", size: 16))
-                        .foregroundColor(.black)
-                }
+        VStack {
+            Text(entry.text).font(Font.custom("ShantellSans-Regular", size: 16))
+                .foregroundColor(.black)
+        }
     }
 }
 
@@ -79,11 +74,14 @@ struct MessageBox: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             if #available(iOS 17.0, *) {
                 MessageBoxEntryView(entry: entry)
+                    .padding(.horizontal, 2)
+                    .padding(.vertical, 2)
                     .containerBackground(.fill.tertiary, for: .widget)
             } else {
                 MessageBoxEntryView(entry: entry)
-                    .padding()
-                    .background()
+                    .padding(.horizontal, 2)
+                    .padding(.vertical, 2)
+                    .background(Color(.systemBackground))
             }
         }
         .configurationDisplayName("My Widget")

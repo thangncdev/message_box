@@ -91,5 +91,5 @@ final currentLocaleProvider = StateProvider<Locale?>((ref) => null);
 
 // Theme provider (key from availableThemes)
 final currentThemeKeyProvider = StateProvider<String>(
-  (ref) => AppThemeKeys.lavender,
+  (ref) => AppThemeKeys.honey,
 );

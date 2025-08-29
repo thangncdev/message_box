@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:message_box/core/theme.dart';
 import 'package:message_box/core/utils/date_format.dart';
 import 'package:message_box/domain/entities/message.dart';
 import 'package:message_box/domain/repositories/message_repository.dart';
-import 'package:message_box/presentation/providers.dart';
 import 'package:message_box/l10n/app_localizations.dart';
-import 'package:message_box/core/theme.dart';
+import 'package:message_box/presentation/providers.dart';
 
 class ListMessages extends ConsumerStatefulWidget {
   final Future<bool> Function(BuildContext context)? onConfirmDelete;

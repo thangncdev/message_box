@@ -6,6 +6,7 @@ import 'package:message_box/l10n/app_localizations.dart';
 import 'package:message_box/presentation/home/home_controller.dart';
 import 'package:message_box/presentation/home/widgets/confirm_delete.dart';
 import 'package:message_box/presentation/home/widgets/featured_section.dart';
+import 'package:message_box/presentation/home/widgets/home_app_bar.dart';
 import 'package:message_box/presentation/home/widgets/list_messages.dart';
 import 'package:message_box/presentation/providers.dart';
 import 'package:message_box/presentation/widgets/add_new_message.dart';
@@ -60,37 +61,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             child: ListView(
               padding: const EdgeInsets.fromLTRB(16, 20, 16, 100),
               children: [
-                // Top bar
-                Row(
-                  children: [
-                    SizedBox(width: 48, height: 48),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Text(
-                        'DearBox',
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 0.5,
-                          height: 1.1,
-                        ),
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () => context.push('/setting'),
-                      icon: const Icon(Icons.settings_outlined),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                Text(
-                  AppLocalizations.of(context)!.messagesTitle,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
+                HomeAppBar(title: AppLocalizations.of(context)!.messagesTitle),
                 const SizedBox(height: 12),
                 const FeaturedSection(),
                 const SizedBox(height: 16),

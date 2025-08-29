@@ -58,30 +58,28 @@ class _PinnedDisplay extends StatelessWidget {
           ],
         ),
         padding: const EdgeInsets.all(20),
-        child: Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                message.content,
-                style: theme.textTheme.titleMedium?.copyWith(
-                  color: (palette?.onCard) ?? Color(0xFF3E3A52),
-                  height: 1.35,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                ),
-                maxLines: 4,
-                overflow: TextOverflow.ellipsis,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              message.content,
+              style: theme.textTheme.titleMedium?.copyWith(
+                color: (palette?.onCard) ?? Color(0xFF3E3A52),
+                height: 1.35,
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
               ),
-              const SizedBox(height: 6),
-              Text(
-                'Pinned',
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: palette?.accent,
-                ),
+              maxLines: 4,
+              overflow: TextOverflow.ellipsis,
+            ),
+            const SizedBox(height: 6),
+            Text(
+              'Pinned',
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: palette?.accent,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

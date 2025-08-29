@@ -5,50 +5,57 @@
 //  Created by Thang Nguyen on 11/7/25.
 //
 
-import AppIntents
-import SwiftUI
 import WidgetKit
+import SwiftUI
 
-struct MessageBoxControl: ControlWidget {
-    var body: some ControlWidgetConfiguration {
-        StaticControlConfiguration(
-            kind: "com.thangnc.mmd.MessageBox",
-            provider: Provider()
-        ) { value in
-            ControlWidgetToggle(
-                "Start Timer",
-                isOn: value,
-                action: StartTimerIntent()
-            ) { isRunning in
-                Label(isRunning ? "On" : "Off", systemImage: "timer")
-            }
-        }
-        .displayName("Timer")
-        .description("A an example control that runs a timer.")
+struct MessageBoxControlProvider: TimelineProvider {
+    func placeholder(in context: Context) -> SimpleControlEntry {
+        SimpleControlEntry(date: Date(), isRunning: false)
+    }
+
+    func getSnapshot(in context: Context, completion: @escaping (SimpleControlEntry) -> ()) {
+        let entry = SimpleControlEntry(date: Date(), isRunning: false)
+        completion(entry)
+    }
+
+    func getTimeline(in context: Context, completion: @escaping (Timeline<SimpleControlEntry>) -> ()) {
+        let entry = SimpleControlEntry(date: Date(), isRunning: false)
+        let timeline = Timeline(entries: [entry], policy: .never)
+        completion(timeline)
     }
 }
 
-extension MessageBoxControl {
-    struct Provider: ControlValueProvider {
-        var previewValue: Bool {
-            false
-        }
+struct SimpleControlEntry: TimelineEntry {
+    let date: Date
+    let isRunning: Bool
+}
 
-        func currentValue() async throws -> Bool {
-            let isRunning = true // Check if the timer is running
-            return isRunning
+struct MessageBoxControlEntryView: View {
+    var entry: MessageBoxControlProvider.Entry
+    
+    var body: some View {
+        VStack {
+            Image(systemName: "timer")
+                .font(.title2)
+                .foregroundColor(entry.isRunning ? .green : .gray)
+            
+            Text(entry.isRunning ? "Running" : "Stopped")
+                .font(.caption)
+                .foregroundColor(.secondary)
         }
     }
 }
 
-struct StartTimerIntent: SetValueIntent {
-    static let title: LocalizedStringResource = "Start a timer"
+struct MessageBoxControl: Widget {
+    let kind: String = "MessageBoxControl"
 
-    @Parameter(title: "Timer is running")
-    var value: Bool
-
-    func perform() async throws -> some IntentResult {
-        // Start / stop the timer based on `value`.
-        return .result()
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: kind, provider: MessageBoxControlProvider()) { entry in
+            MessageBoxControlEntryView(entry: entry)
+                .padding()
+                .background(Color(.systemBackground))
+        }
+        .configurationDisplayName("Timer Control")
+        .description("A simple timer control widget.")
     }
 }
