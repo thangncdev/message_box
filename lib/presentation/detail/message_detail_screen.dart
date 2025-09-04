@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:message_box/core/utils/date_format.dart';
 import 'package:message_box/l10n/app_localizations.dart';
 import 'package:message_box/presentation/providers.dart';
+import 'package:message_box/presentation/widgets/base_screen.dart';
+import 'package:message_box/presentation/widgets/base_app_bar.dart';
 
 class MessageDetailScreen extends ConsumerWidget {
   final String messageId;
@@ -16,20 +18,20 @@ class MessageDetailScreen extends ConsumerWidget {
       future: future,
       builder: (context, snapshot) {
         final m = snapshot.data;
-        return Scaffold(
-          appBar: AppBar(
-            title: Text(AppLocalizations.of(context)!.detailTitle),
+        return BaseScreen(
+          appBar: GradientAppBar(
+            title: AppLocalizations.of(context)!.detailTitle,
             actions: [
-              IconButton(
-                icon: const Icon(Icons.edit),
-                onPressed: m == null
-                    ? null
-                    : () async {
+              if (m != null)
+                PopupMenuButton<_MenuOption>(
+                  icon: const Icon(Icons.more_horiz_rounded),
+                  onSelected: (value) async {
+                    switch (value) {
+                      case _MenuOption.edit:
                         final changed = await context.push<bool>(
                           '/edit/${m.id}',
                         );
                         if (changed == true && context.mounted) {
-                          // trigger a snack
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
@@ -38,16 +40,9 @@ class MessageDetailScreen extends ConsumerWidget {
                             ),
                           );
                         }
-                      },
-              ),
-              IconButton(
-                icon: Icon(
-                  m?.pinned == true ? Icons.push_pin : Icons.push_pin_outlined,
-                ),
-                onPressed: m == null
-                    ? null
-                    : () async {
-                        if (!(m.pinned)) {
+                        break;
+                      case _MenuOption.pin:
+                        if (!m.pinned) {
                           final success = await ref
                               .read(messageProvider.notifier)
                               .togglePin(m.id);
@@ -62,13 +57,8 @@ class MessageDetailScreen extends ConsumerWidget {
                             context.pop();
                           }
                         }
-                      },
-              ),
-              IconButton(
-                icon: const Icon(Icons.delete_outline),
-                onPressed: m == null
-                    ? null
-                    : () async {
+                        break;
+                      case _MenuOption.delete:
                         final ok = await _confirmDelete(context);
                         if (ok) {
                           final success = await ref
@@ -76,26 +66,106 @@ class MessageDetailScreen extends ConsumerWidget {
                               .deleteMessage(m.id);
                           if (success && context.mounted) context.pop(true);
                         }
-                      },
-              ),
+                        break;
+                    }
+                  },
+                  itemBuilder: (context) {
+                    final items = <PopupMenuEntry<_MenuOption>>[];
+                    items.add(
+                      PopupMenuItem<_MenuOption>(
+                        value: _MenuOption.edit,
+                        child: Text(AppLocalizations.of(context)!.edit),
+                      ),
+                    );
+                    if (!(m.pinned)) {
+                      items.add(
+                        PopupMenuItem<_MenuOption>(
+                          value: _MenuOption.pin,
+                          child: Text(AppLocalizations.of(context)!.pin),
+                        ),
+                      );
+                    }
+                    items.add(
+                      PopupMenuItem<_MenuOption>(
+                        value: _MenuOption.delete,
+                        child: Text(AppLocalizations.of(context)!.delete),
+                      ),
+                    );
+                    items.add(const PopupMenuDivider(height: 8));
+
+                    return items;
+                  },
+                ),
             ],
           ),
-          body: snapshot.connectionState == ConnectionState.waiting
+          child: snapshot.connectionState == ConnectionState.waiting
               ? const Center(child: CircularProgressIndicator())
               : m == null
-              ? const Center(child: Text('Not found'))
-              : SingleChildScrollView(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(m.content, style: const TextStyle(fontSize: 18)),
-                      const SizedBox(height: 12),
-                      Text(
-                        '${AppLocalizations.of(context)!.updated}: ${formatRelative(m.updatedAt ?? m.createdAt, context)}',
-                        style: const TextStyle(color: Colors.black54),
-                      ),
-                    ],
+              ? Center(child: Text(AppLocalizations.of(context)!.noMessages))
+              : Align(
+                  alignment: Alignment.topCenter,
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        TweenAnimationBuilder<double>(
+                          duration: const Duration(milliseconds: 700),
+                          curve: Curves.easeOutCubic,
+                          tween: Tween(begin: 0.0, end: 1.0),
+                          builder: (context, t, child) {
+                            return Opacity(
+                              opacity: t,
+                              child: Transform.translate(
+                                offset: Offset(0, (1 - t) * 24),
+                                child: child,
+                              ),
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).cardColor,
+                              borderRadius: BorderRadius.circular(16),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.08),
+                                  blurRadius: 16,
+                                  offset: const Offset(0, 8),
+                                ),
+                              ],
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 20,
+                            ),
+                            child: Text(
+                              m.content,
+                              style: const TextStyle(fontSize: 20, height: 1.5),
+                              textAlign: TextAlign.left,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(
+                              Icons.access_time,
+                              size: 14,
+                              color: Colors.black45,
+                            ),
+                            const SizedBox(width: 6),
+                            Text(
+                              '${AppLocalizations.of(context)!.updated}: ${formatRelative(m.updatedAt ?? m.createdAt, context)}',
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: Colors.black54,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
         );
@@ -107,16 +177,16 @@ class MessageDetailScreen extends ConsumerWidget {
     final res = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Delete'),
-        content: const Text('Are you sure you want to delete this message?'),
+        title: Text(AppLocalizations.of(context)!.delete),
+        content: Text(AppLocalizations.of(context)!.confirmDelete),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancel'),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           FilledButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Delete'),
+            child: Text(AppLocalizations.of(context)!.delete),
           ),
         ],
       ),
@@ -124,3 +194,5 @@ class MessageDetailScreen extends ConsumerWidget {
     return res ?? false;
   }
 }
+
+enum _MenuOption { edit, pin, delete }

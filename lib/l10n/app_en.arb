@@ -17,7 +17,7 @@
   "updated": "Updated",
   "pinned": "Pinned",
   "unpinned": "Unpinned",
-  "emptyFeaturedText": "Write what you want to remind yourself…",
+  "emptyFeaturedText": "Write a note you’d like to leave for yourself...",
   "emptyFeaturedAction": "Write your first message",
   "noMessages": "No messages",
   "lastUpdated": "Last updated: {minutes} min ago",
@@ -29,10 +29,13 @@
   "writeSomething": "Write something…",
   "save": "Save",
   "errorEmpty": "Content must not be empty",
-  "errorTooLong": "Max 280 characters",
+  "errorTooLong": "Max 1000 characters",
   "settings": "Settings",
   "justNow": "just now",
   "minutesAgo": "min ago",
-  "hoursAgo": "h ago"
+  "hoursAgo": "h ago",
+  "yourPersonalMessageBox": "yourPersonalMessageBox",
+  "makeChangesToYourMessage": "makeChangesToYourMessage",
+
 }
 

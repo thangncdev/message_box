@@ -17,7 +17,7 @@
   "updated": "Đã cập nhật",
   "pinned": "Đã ghim",
   "unpinned": "Bỏ ghim",
-  "emptyFeaturedText": "Viết điều bạn muốn nhắc mình…",
+  "emptyFeaturedText": "Viết một lời nhắn bạn muốn tự dành cho chính mình...",
   "emptyFeaturedAction": "Viết lời nhắn đầu tiên",
   "noMessages": "Chưa có lời nhắn",
   "lastUpdated": "Cập nhật {minutes} phút trước",
@@ -29,10 +29,13 @@
   "writeSomething": "Viết gì đó…",
   "save": "Lưu",
   "errorEmpty": "Nội dung không được để trống",
-  "errorTooLong": "Tối đa 280 ký tự",
-  "settings":"Cài đặt"
+  "errorTooLong": "Tối đa 1000 ký tự",
+    "settings":"Cài đặt"
   ,"justNow": "vừa xong",
   "minutesAgo": "phút trước",
-  "hoursAgo": "giờ trước"
+  "hoursAgo": "giờ trước",
+  "yourPersonalMessageBox": "yourPersonalMessageBox",
+  "makeChangesToYourMessage":"makeChangesToYourMessage"
+  
 }
 

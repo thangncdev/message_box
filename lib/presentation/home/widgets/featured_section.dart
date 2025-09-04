@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:message_box/domain/entities/message.dart';
 import 'package:message_box/presentation/providers.dart';
 import 'package:message_box/presentation/widgets/empty_state.dart';
 import 'package:message_box/core/theme.dart';
+import 'package:message_box/assets/images/app_images.dart';
+import 'package:message_box/l10n/app_localizations.dart';
 
 class FeaturedSection extends ConsumerWidget {
   const FeaturedSection({super.key});
@@ -24,9 +27,9 @@ class FeaturedSection extends ConsumerWidget {
 
     // Nếu không có message nào
     if (allMessages.isEmpty) {
-      return const EmptyState(
-        text: 'Viết điều bạn muốn nhắc mình…',
-        actionLabel: 'Viết lời nhắn đầu tiên',
+      return EmptyState(
+        text: AppLocalizations.of(context)!.emptyFeaturedText,
+        actionLabel: AppLocalizations.of(context)!.emptyFeaturedAction,
         route: '/compose',
       );
     }
@@ -54,44 +57,58 @@ class _PinnedDisplay extends StatelessWidget {
     final palette = theme.extension<PastelPalette>();
     return Material(
       color: Colors.transparent,
-      child: Container(
-        decoration: BoxDecoration(
-          color: (palette?.pinnedBg) ?? const Color(0xFFFFF2C6),
-          borderRadius: BorderRadius.circular(24),
-          border: Border.all(
-            color: (palette?.borderColor) ?? const Color(0x14000000),
+      child: InkWell(
+        onTap: () => context.push('/detail/${message.id}'),
+        child: Container(
+          decoration: BoxDecoration(
+            color: (palette?.pinnedBg) ?? const Color(0xFFFFF2C6),
+            borderRadius: BorderRadius.circular(24),
+            border: Border.all(
+              color: (palette?.borderColor) ?? const Color(0x14000000),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.06),
+                blurRadius: 16,
+                offset: const Offset(0, 10),
+              ),
+            ],
           ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.06),
-              blurRadius: 16,
-              offset: const Offset(0, 10),
-            ),
-          ],
-        ),
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              message.content,
-              style: theme.textTheme.titleMedium?.copyWith(
-                color: (palette?.onCard) ?? Color(0xFF3E3A52),
-                height: 1.35,
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      message.content,
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        color: (palette?.onCard) ?? Color(0xFF3E3A52),
+                        height: 1.35,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      maxLines: 4,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      isPinned ? 'Pinned' : 'Latest',
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: palette?.accent,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              maxLines: 4,
-              overflow: TextOverflow.ellipsis,
-            ),
-            const SizedBox(height: 6),
-            Text(
-              isPinned ? 'Pinned' : 'Latest',
-              style: theme.textTheme.bodySmall?.copyWith(
-                color: palette?.accent,
+              Positioned(
+                top: 12,
+                right: 12,
+                child: Image.asset(AppImages.pin_paper, width: 24, height: 24),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

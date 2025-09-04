@@ -7,6 +7,7 @@ import 'package:message_box/domain/entities/message.dart';
 import 'package:message_box/domain/repositories/message_repository.dart';
 import 'package:message_box/l10n/app_localizations.dart';
 import 'package:message_box/presentation/providers.dart';
+import 'package:message_box/presentation/home/widgets/search_field.dart';
 
 class ListMessages extends ConsumerStatefulWidget {
   final Future<bool> Function(BuildContext context)? onConfirmDelete;
@@ -39,45 +40,19 @@ class _ListMessagesState extends ConsumerState<ListMessages> {
     final messageState = ref.watch(messageProvider);
     final messages = ref.watch(messagesListProvider);
     final palette = Theme.of(context).extension<PastelPalette>()!;
+    if (messages.isEmpty) {
+      return const SizedBox.shrink();
+    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Search field
-        Container(
-          decoration: BoxDecoration(
-            color: palette.searchFill,
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: Colors.white),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.04),
-                blurRadius: 8,
-                offset: const Offset(0, 4),
-              ),
-            ],
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: TextField(
-            controller: _searchCtrl,
-            decoration: InputDecoration(
-              hintText: AppLocalizations.of(context)!.searchHint,
-              prefixIcon: const Icon(Icons.search, color: Color(0xFF6E67A6)),
-              suffixIcon: _query.isNotEmpty
-                  ? IconButton(
-                      icon: const Icon(Icons.clear, color: Color(0xFF6E67A6)),
-                      onPressed: () {
-                        setState(() {
-                          _query = '';
-                          _searchCtrl.clear();
-                        });
-                      },
-                    )
-                  : null,
-              border: InputBorder.none,
-              hintStyle: const TextStyle(color: Color(0xFF6E67A6)),
-            ),
-            onChanged: (v) => setState(() => _query = v.trim()),
-          ),
+        // Search field (refactored)
+        AnimatedSearchField(
+          hintText: AppLocalizations.of(context)!.searchHint,
+          onChanged: (v) => setState(() => _query = v),
+          iconColor: palette.accent,
+          borderColor: palette.accent,
+          expandedWidthFactor: 0.92,
         ),
         const SizedBox(height: 12),
         if (messageState.isLoading)
@@ -104,12 +79,7 @@ class _ListMessagesState extends ConsumerState<ListMessages> {
               final data = filtered;
 
               if (data.isEmpty) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 24),
-                  child: Center(
-                    child: Text(AppLocalizations.of(context)!.noMessages),
-                  ),
-                );
+                return const SizedBox.shrink();
               }
 
               return ListView.builder(

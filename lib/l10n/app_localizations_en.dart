@@ -24,7 +24,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get editMessage => 'Edit Message';
 
   @override
-  String get searchHint => 'Search...';
+  String get searchHint => 'Search a old message...';
 
   @override
   String get newest => 'Newest';
@@ -63,7 +63,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get unpinned => 'Unpinned';
 
   @override
-  String get emptyFeaturedText => 'Write what you want to remind yourself…';
+  String get emptyFeaturedText =>
+      'Write a note you’d like to leave for yourself...';
 
   @override
   String get emptyFeaturedAction => 'Write your first message';
@@ -101,7 +102,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get errorEmpty => 'Content must not be empty';
 
   @override
-  String get errorTooLong => 'Max 280 characters';
+  String get errorTooLong => 'Max 1000 characters';
 
   @override
   String get settings => 'Settings';
@@ -114,4 +115,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get hoursAgo => 'h ago';
+
+  @override
+  String get yourPersonalMessageBox => 'Your personal message box';
+
+  @override
+  String get makeChangesToYourMessage => 'Make changes to your message';
+
+  @override
+  String get yourMessage => 'Your message';
+
+  @override
+  String get more => 'More';
+
+  @override
+  String get feedback => 'Feedback';
+
+  @override
+  String get rateThisApp => 'Rate this app';
+
+  @override
+  String get settingsSubtitle => 'App preferences and appearance';
+
+  @override
+  String get feedbackSubtitle => 'Tell us what you think';
+
+  @override
+  String get rateAppSubtitle => 'Leave a review on the store';
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:message_box/core/theme.dart';
 import 'package:message_box/l10n/app_localizations.dart';
 import 'package:message_box/presentation/home/widgets/confirm_delete.dart';
 import 'package:message_box/presentation/home/widgets/featured_section.dart';
@@ -9,6 +8,7 @@ import 'package:message_box/presentation/home/widgets/home_app_bar.dart';
 import 'package:message_box/presentation/home/widgets/list_messages.dart';
 import 'package:message_box/presentation/providers.dart';
 import 'package:message_box/presentation/widgets/add_new_message.dart';
+import 'package:message_box/presentation/widgets/base_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -28,8 +28,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final palette = Theme.of(context).extension<PastelPalette>()!;
-    return Scaffold(
+    return BaseScrollableScreen(
       extendBody: true,
       extendBodyBehindAppBar: true,
       floatingActionButton: AddNewMessageButton(
@@ -42,44 +41,28 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           }
         },
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [palette.gradientStart, palette.gradientEnd],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+      padding: const EdgeInsets.fromLTRB(16, 20, 16, 100),
+      showRefreshIndicator: true,
+      onRefresh: () async {
+        await ref
+            .read(messageProvider.notifier)
+            .refreshFeaturedMessage('latest');
+      },
+      children: [
+        HomeAppBar(title: AppLocalizations.of(context)!.messagesTitle),
+        const SizedBox(height: 12),
+        const FeaturedSection(),
+        const SizedBox(height: 16),
+        ListMessages(
+          onConfirmDelete: (context) => showConfirmDeleteDialog(context),
+          onTogglePin: (m) async {
+            await ref.read(messageProvider.notifier).togglePin(m.id);
+          },
+          onDeleted: (m) async {
+            await ref.read(messageProvider.notifier).deleteMessage(m.id);
+          },
         ),
-        child: SafeArea(
-          child: RefreshIndicator(
-            onRefresh: () async {
-              await ref
-                  .read(messageProvider.notifier)
-                  .refreshFeaturedMessage('latest');
-            },
-            child: ListView(
-              padding: const EdgeInsets.fromLTRB(16, 20, 16, 100),
-              children: [
-                HomeAppBar(title: AppLocalizations.of(context)!.messagesTitle),
-                const SizedBox(height: 12),
-                const FeaturedSection(),
-                const SizedBox(height: 16),
-                ListMessages(
-                  onConfirmDelete: showConfirmDeleteDialog,
-                  onTogglePin: (m) async {
-                    await ref.read(messageProvider.notifier).togglePin(m.id);
-                  },
-                  onDeleted: (m) async {
-                    await ref
-                        .read(messageProvider.notifier)
-                        .deleteMessage(m.id);
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+      ],
     );
   }
 }

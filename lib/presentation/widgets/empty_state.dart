@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:message_box/core/theme.dart';
 
 class EmptyState extends StatelessWidget {
   final String text;
@@ -14,12 +15,13 @@ class EmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = Theme.of(context).extension<PastelPalette>()!;
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 40),
       alignment: Alignment.center,
       child: Column(
         children: [
-          const Icon(Icons.chat_bubble_outline, size: 56, color: Colors.grey),
+          Icon(Icons.chat_bubble_outline, size: 56, color: palette.accent),
           const SizedBox(height: 12),
           Text(
             text,

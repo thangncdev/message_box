@@ -201,7 +201,7 @@ ThemeData buildAppTheme(String key) {
       seedColor: primary,
       primary: primary,
       secondary: primary,
-      background: background,
+      surface: background,
       brightness: Brightness.light,
     ),
     useMaterial3: true,

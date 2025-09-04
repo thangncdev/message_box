@@ -1,0 +1,25 @@
+const List<String> listPlaceholderWriteSomethingEN = [
+  'Write yourself a little something sweet...',
+  'Just a few words can make you smile.',
+  'Let this note be a gift to your future self.',
+  'Put it into words, and let your heart breathe.',
+  'This space is just for you — feel free to write.',
+  'Leave a gentle reminder for tomorrow.',
+  'Send yourself a spark of kindness.',
+  'A single line can carry you through tough times.',
+  'Let these words lift you up when you need it most.',
+  'Write something that future you will smile at.',
+  'Capture a little moment from today.',
+  'Write as if you\'re whispering to yourself.',
+  'Even random notes can turn into memories.',
+  'It doesn\'t have to be perfect — just honest.',
+  'So tomorrow you\'ll read this and think: yeah, that was me.',
+];
+const List<String> listPlaceholderWriteSomethingVI = [
+  "Hãy viết một điều khiến bạn mỉm cười hôm nay 🌸",
+  "Bạn muốn cảm ơn bản thân vì điều gì?",
+  "Chẳng cần hoa mỹ, chỉ cần thật lòng",
+  "Gửi cho chính mình một nguồn năng lượng tốt lành",
+  "Đây là khoảng riêng cho bạn, cứ tự nhiên…",
+  "Một dòng chữ nhỏ cũng đủ làm bạn mỉm cười",
+];

@@ -2,6 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:message_box/presentation/providers.dart';
 import 'package:message_box/services/widget_service.dart';
 
+final int maxLength = 1000;
+
 class ComposeState {
   final String content;
   final String? error;
@@ -9,7 +11,7 @@ class ComposeState {
   const ComposeState({this.content = '', this.error});
 
   bool get canSave =>
-      content.trim().isNotEmpty && content.trim().runes.length <= 280;
+      content.trim().isNotEmpty && content.trim().runes.length <= maxLength;
 
   ComposeState copyWith({String? content, String? error}) =>
       ComposeState(content: content ?? this.content, error: error);
@@ -24,13 +26,13 @@ class ComposeController extends StateNotifier<ComposeState> {
     final trimmed = value.trim();
     final length = trimmed.runes.length;
     if (length == 0) error = 'Nội dung không được để trống';
-    if (length > 280) error = 'Tối đa 280 ký tự';
+    if (length > maxLength) error = 'Tối đa $maxLength ký tự';
     state = state.copyWith(content: value, error: error);
   }
 
-  Future<void> saveNew() async {
+    Future<bool> saveNew() async {
     final trimmed = state.content.trim();
-    if (trimmed.isEmpty || trimmed.runes.length > 280) return;
+    if (trimmed.isEmpty || trimmed.runes.length > maxLength) return false;
 
     final success = await ref
         .read(messageProvider.notifier)
@@ -38,11 +40,13 @@ class ComposeController extends StateNotifier<ComposeState> {
     if (success) {
       await WidgetService.updateWidget(content: trimmed);
     }
+    return success;
   }
 
-  Future<void> saveEdit(String id) async {
+  Future<bool> saveEdit(String id) async {
     final trimmed = state.content.trim();
-    if (trimmed.isEmpty || trimmed.runes.length > 280) return;
+    if (trimmed.isEmpty || trimmed.runes.length > maxLength) 
+    return false;
 
     final success = await ref
         .read(messageProvider.notifier)
@@ -50,6 +54,7 @@ class ComposeController extends StateNotifier<ComposeState> {
     if (success) {
       await WidgetService.updateWidget(content: trimmed);
     }
+    return success;
   }
 }
 

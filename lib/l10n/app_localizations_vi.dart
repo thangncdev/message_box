@@ -24,7 +24,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get editMessage => 'Sửa lời nhắn';
 
   @override
-  String get searchHint => 'Tìm kiếm...';
+  String get searchHint => 'Tìm một lời nhắn cũ...';
 
   @override
   String get newest => 'Mới nhất';
@@ -63,7 +63,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get unpinned => 'Bỏ ghim';
 
   @override
-  String get emptyFeaturedText => 'Viết điều bạn muốn nhắc mình…';
+  String get emptyFeaturedText => 'Vài lời nhắn nhủ cho chính mình…';
 
   @override
   String get emptyFeaturedAction => 'Viết lời nhắn đầu tiên';
@@ -101,7 +101,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get errorEmpty => 'Nội dung không được để trống';
 
   @override
-  String get errorTooLong => 'Tối đa 280 ký tự';
+  String get errorTooLong => 'Tối đa 1000 ký tự';
 
   @override
   String get settings => 'Cài đặt';
@@ -114,4 +114,31 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get hoursAgo => 'giờ trước';
+
+  @override
+  String get yourPersonalMessageBox => 'Hộp tin nhắn cá nhân của bạn';
+
+  @override
+  String get makeChangesToYourMessage => 'Sửa lời nhắn của bạn';
+
+  @override
+  String get yourMessage => 'Lời nhắn của bạn';
+
+  @override
+  String get more => 'Thêm';
+
+  @override
+  String get feedback => 'Phản hồi';
+
+  @override
+  String get rateThisApp => 'Đánh giá ứng dụng';
+
+  @override
+  String get settingsSubtitle => 'Tùy chỉnh và giao diện ứng dụng';
+
+  @override
+  String get feedbackSubtitle => 'Cho chúng tôi biết ý kiến của bạn';
+
+  @override
+  String get rateAppSubtitle => 'Để lại đánh giá trên cửa hàng';
 }

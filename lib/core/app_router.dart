@@ -4,6 +4,7 @@ import 'package:message_box/presentation/home/home_screen.dart';
 import 'package:message_box/presentation/detail/message_detail_screen.dart';
 import 'package:message_box/presentation/composer/compose_screen.dart';
 import 'package:message_box/presentation/setting/setting_screen.dart';
+import 'package:message_box/presentation/more/more_screen.dart';
 
 /// Centralized app router using go_router
 final Provider<GoRouter> appRouterProvider = Provider<GoRouter>((ref) {
@@ -23,6 +24,11 @@ final Provider<GoRouter> appRouterProvider = Provider<GoRouter>((ref) {
         path: '/setting',
         name: 'setting',
         builder: (context, state) => const SettingScreen(),
+      ),
+      GoRoute(
+        path: '/more',
+        name: 'more',
+        builder: (context, state) => const MoreScreen(),
       ),
       GoRoute(
         path: '/detail/:id',
