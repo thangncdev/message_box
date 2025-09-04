@@ -361,6 +361,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Leave a review on the store'**
   String get rateAppSubtitle;
+
+  /// No description provided for @widgetGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'Widget Guide'**
+  String get widgetGuide;
+
+  /// No description provided for @widgetGuideSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How to add DearBox to Home Screen'**
+  String get widgetGuideSubtitle;
+
+  /// No description provided for @guideAppBarTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add DearBox Widget'**
+  String get guideAppBarTitle;
+
+  /// No description provided for @guideTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How to add DearBox widget to the Home Screen'**
+  String get guideTitle;
+
+  /// No description provided for @guideSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick steps to start brightening your day ✨'**
+  String get guideSubtitle;
+
+  /// iOS specific guide title
+  String get guideTitleIos;
+
+  /// iOS Steps
+  String get guideStepIosJiggle;
+  String get guideStepIosTapPlus;
+  String get guideStepIosFindInGallery;
+  String get guideStepIosChooseStyle;
+  String get guideStepIosTapAddWidget;
+  String get guideStepIosDragPosition;
+  String get guideStepIosTapDone;
+
+  /// No description provided for @guideStepLongPress.
+  String get guideStepLongPress;
+
+  /// No description provided for @guideStepSelectWidgets.
+  String get guideStepSelectWidgets;
+
+  /// No description provided for @guideStepFindDearBox.
+  String get guideStepFindDearBox;
+
+  /// No description provided for @guideStepChooseStyle.
+  String get guideStepChooseStyle;
+
+  /// No description provided for @guideStepTapAdd.
+  String get guideStepTapAdd;
+
+  /// No description provided for @guideStepPlaceAnywhere.
+  String get guideStepPlaceAnywhere;
+
+  /// No description provided for @guideFooter.
+  String get guideFooter;
+
+  /// No description provided for @done.
+  String get done;
 }
 
 class _AppLocalizationsDelegate

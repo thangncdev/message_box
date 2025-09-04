@@ -5,6 +5,9 @@ import 'package:message_box/presentation/detail/message_detail_screen.dart';
 import 'package:message_box/presentation/composer/compose_screen.dart';
 import 'package:message_box/presentation/setting/setting_screen.dart';
 import 'package:message_box/presentation/more/more_screen.dart';
+import 'package:message_box/presentation/onboarding/onboarding_screen.dart';
+import 'package:message_box/presentation/guide/guide_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// Centralized app router using go_router
 final Provider<GoRouter> appRouterProvider = Provider<GoRouter>((ref) {
@@ -46,6 +49,25 @@ final Provider<GoRouter> appRouterProvider = Provider<GoRouter>((ref) {
           return ComposeScreen(messageId: id);
         },
       ),
+      GoRoute(
+        path: '/onboarding',
+        name: 'onboarding',
+        builder: (context, state) => const OnboardingScreen(),
+      ),
+      GoRoute(
+        path: '/guide',
+        name: 'guide',
+        builder: (context, state) => const GuideScreen(),
+      ),
     ],
+    redirect: (context, state) async {
+      final prefs = await SharedPreferences.getInstance();
+      final seen = prefs.getBool('seen_onboarding') ?? false;
+      final loggingInOnboarding = state.matchedLocation == '/onboarding';
+      if (!seen && !loggingInOnboarding) {
+        return '/onboarding';
+      }
+      return null;
+    },
   );
 });

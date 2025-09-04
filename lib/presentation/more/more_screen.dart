@@ -27,6 +27,13 @@ class MoreScreen extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           _CardTile(
+            icon: Icons.help_outline_rounded,
+            title: AppLocalizations.of(context)!.widgetGuide,
+            subtitle: AppLocalizations.of(context)!.widgetGuideSubtitle,
+            onTap: () => context.push('/guide'),
+          ),
+          const SizedBox(height: 12),
+          _CardTile(
             icon: Icons.mail_outline,
             title: AppLocalizations.of(context)!.feedback,
             subtitle: AppLocalizations.of(context)!.feedbackSubtitle,

@@ -142,4 +142,71 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get rateAppSubtitle => 'Leave a review on the store';
+
+  @override
+  String get widgetGuide => 'Widget Guide';
+
+  @override
+  String get widgetGuideSubtitle => 'How to add DearBox to Home Screen';
+
+  @override
+  String get guideAppBarTitle => 'Add DearBox Widget';
+
+  @override
+  String get guideTitle => 'How to add DearBox widget to the Home Screen';
+
+  @override
+  String get guideSubtitle => 'Quick steps to start brightening your day ✨';
+
+  @override
+  String get guideTitleIos =>
+      'How to add DearBox widget to the Home Screen (iOS)';
+
+  @override
+  String get guideStepIosJiggle =>
+      'Long press on an empty area until apps jiggle.';
+
+  @override
+  String get guideStepIosTapPlus => 'Tap the + button at the top-left corner.';
+
+  @override
+  String get guideStepIosFindInGallery =>
+      'In Widget Gallery, scroll and find DearBox.';
+
+  @override
+  String get guideStepIosChooseStyle => 'Choose a widget style.';
+
+  @override
+  String get guideStepIosTapAddWidget => 'Tap Add Widget.';
+
+  @override
+  String get guideStepIosDragPosition => 'Drag it to your desired position.';
+
+  @override
+  String get guideStepIosTapDone => 'Tap Done at the top-right to finish.';
+
+  @override
+  String get guideStepLongPress => 'Long press on Home Screen.';
+
+  @override
+  String get guideStepSelectWidgets => 'Select "Widgets".';
+
+  @override
+  String get guideStepFindDearBox => 'Find "DearBox".';
+
+  @override
+  String get guideStepChooseStyle =>
+      'Choose a style (Today’s Note / Random Quote).';
+
+  @override
+  String get guideStepTapAdd => 'Tap "Add".';
+
+  @override
+  String get guideStepPlaceAnywhere => 'Place it anywhere you like.';
+
+  @override
+  String get guideFooter => 'Let DearBox brighten your day ✨';
+
+  @override
+  String get done => 'Done';
 }
