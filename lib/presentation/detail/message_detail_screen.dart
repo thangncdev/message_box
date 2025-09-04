@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:message_box/core/utils/date_format.dart';
 import 'package:message_box/l10n/app_localizations.dart';
-import 'package:message_box/presentation/home/home_controller.dart';
 import 'package:message_box/presentation/providers.dart';
 
 class MessageDetailScreen extends ConsumerWidget {
@@ -12,7 +11,7 @@ class MessageDetailScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final future = ref.watch(getMessageProvider).call(messageId);
+    final future = ref.read(messageProvider.notifier).getMessage(messageId);
     return FutureBuilder(
       future: future,
       builder: (context, snapshot) {
@@ -49,10 +48,10 @@ class MessageDetailScreen extends ConsumerWidget {
                     ? null
                     : () async {
                         if (!(m.pinned)) {
-                          await ref
-                              .read(homeControllerProvider.notifier)
-                              .onPinToggle(m.id);
-                          if (context.mounted) {
+                          final success = await ref
+                              .read(messageProvider.notifier)
+                              .togglePin(m.id);
+                          if (success && context.mounted) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
@@ -60,9 +59,8 @@ class MessageDetailScreen extends ConsumerWidget {
                                 ),
                               ),
                             );
+                            context.pop();
                           }
-
-                          context.pop();
                         }
                       },
               ),
@@ -73,8 +71,10 @@ class MessageDetailScreen extends ConsumerWidget {
                     : () async {
                         final ok = await _confirmDelete(context);
                         if (ok) {
-                          await ref.read(deleteMessageProvider).call(m.id);
-                          if (context.mounted) context.pop(true);
+                          final success = await ref
+                              .read(messageProvider.notifier)
+                              .deleteMessage(m.id);
+                          if (success && context.mounted) context.pop(true);
                         }
                       },
               ),

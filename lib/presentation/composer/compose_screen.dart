@@ -22,7 +22,9 @@ class _ComposeScreenState extends ConsumerState<ComposeScreen> {
     super.initState();
     Future.microtask(() async {
       if (widget.messageId != null) {
-        final m = await ref.read(getMessageProvider).call(widget.messageId!);
+        final m = await ref
+            .read(messageProvider.notifier)
+            .getMessage(widget.messageId!);
         if (m != null) {
           _ctrl.text = m.content;
           ref.read(composeControllerProvider.notifier).setContent(m.content);
@@ -98,7 +100,9 @@ class _ComposeScreenState extends ConsumerState<ComposeScreen> {
               Align(
                 alignment: Alignment.centerRight,
                 child: FutureBuilder(
-                  future: ref.read(getMessageProvider).call(widget.messageId!),
+                  future: ref
+                      .read(messageProvider.notifier)
+                      .getMessage(widget.messageId!),
                   builder: (context, snapshot) {
                     final updatedAt =
                         snapshot.data?.updatedAt ?? snapshot.data?.createdAt;

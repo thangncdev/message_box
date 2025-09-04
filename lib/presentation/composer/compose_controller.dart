@@ -1,6 +1,4 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:message_box/core/utils/id.dart';
-import 'package:message_box/domain/entities/message.dart';
 import 'package:message_box/presentation/providers.dart';
 import 'package:message_box/services/widget_service.dart';
 
@@ -33,31 +31,25 @@ class ComposeController extends StateNotifier<ComposeState> {
   Future<void> saveNew() async {
     final trimmed = state.content.trim();
     if (trimmed.isEmpty || trimmed.runes.length > 280) return;
-    final now = DateTime.now().toUtc();
-    final message = Message(
-      id: generateId(),
-      content: trimmed,
-      createdAt: now,
-      updatedAt: null,
-      pinned: false,
-    );
-    await ref.read(createMessageProvider).call(message);
-    ref.read(refreshTickProvider.notifier).state++;
-    await WidgetService.updateWidget(content: trimmed);
+
+    final success = await ref
+        .read(messageProvider.notifier)
+        .createMessage(trimmed);
+    if (success) {
+      await WidgetService.updateWidget(content: trimmed);
+    }
   }
 
   Future<void> saveEdit(String id) async {
-    final existing = await ref.read(getMessageProvider).call(id);
-    if (existing == null) return;
     final trimmed = state.content.trim();
     if (trimmed.isEmpty || trimmed.runes.length > 280) return;
-    final updated = existing.copyWith(
-      content: trimmed,
-      updatedAt: DateTime.now().toUtc(),
-    );
-    await ref.read(updateMessageProvider).call(updated);
-    ref.read(refreshTickProvider.notifier).state++;
-    await WidgetService.updateWidget(content: trimmed);
+
+    final success = await ref
+        .read(messageProvider.notifier)
+        .updateMessage(id, trimmed);
+    if (success) {
+      await WidgetService.updateWidget(content: trimmed);
+    }
   }
 }
 

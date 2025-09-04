@@ -9,7 +9,10 @@ class SettingScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentLocale = ref.watch(currentLocaleProvider);
+    final appState = ref.watch(appProvider);
+    final currentLocale = appState.locale;
+    final currentTheme = appState.themeKey;
+
     return Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context)!.settings)),
       body: ListView(
@@ -30,17 +33,17 @@ class SettingScreen extends ConsumerWidget {
               DropdownMenuItem(value: 'en', child: Text('English')),
               DropdownMenuItem(value: 'vi', child: Text('Tiếng Việt')),
             ],
-            onChanged: (v) {
+            onChanged: (v) async {
               if (v == 'system') {
-                ref.read(currentLocaleProvider.notifier).state = null;
+                await ref.read(appProvider.notifier).changeLocale(null);
               } else if (v == 'en') {
-                ref.read(currentLocaleProvider.notifier).state = const Locale(
-                  'en',
-                );
+                await ref
+                    .read(appProvider.notifier)
+                    .changeLocale(const Locale('en'));
               } else if (v == 'vi') {
-                ref.read(currentLocaleProvider.notifier).state = const Locale(
-                  'vi',
-                );
+                await ref
+                    .read(appProvider.notifier)
+                    .changeLocale(const Locale('vi'));
               }
             },
             decoration: const InputDecoration(border: OutlineInputBorder()),
@@ -49,18 +52,56 @@ class SettingScreen extends ConsumerWidget {
           Text('Theme', style: const TextStyle(fontWeight: FontWeight.w600)),
           const SizedBox(height: 8),
           DropdownButtonFormField<String>(
-            value: ref.watch(currentThemeKeyProvider),
+            value: currentTheme,
             items: [
               for (final key in availableThemes)
                 DropdownMenuItem(value: key, child: Text(key)),
             ],
-            onChanged: (v) {
+            onChanged: (v) async {
               if (v != null) {
-                ref.read(currentThemeKeyProvider.notifier).state = v;
+                await ref.read(appProvider.notifier).changeTheme(v);
               }
             },
             decoration: const InputDecoration(border: OutlineInputBorder()),
           ),
+          const SizedBox(height: 24),
+          // Reset to defaults button
+          ElevatedButton(
+            onPressed: () async {
+              await ref.read(appProvider.notifier).resetToDefaults();
+            },
+            child: Text('Reset to Defaults'),
+          ),
+          // Error display
+          if (appState.error != null) ...[
+            const SizedBox(height: 16),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.red.shade50,
+                border: Border.all(color: Colors.red.shade200),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.error, color: Colors.red.shade600),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      appState.error!,
+                      style: TextStyle(color: Colors.red.shade700),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      ref.read(appProvider.notifier).clearError();
+                    },
+                    icon: Icon(Icons.close, color: Colors.red.shade600),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ],
       ),
     );

@@ -10,31 +10,43 @@ class FeaturedSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final stream = ref.watch(messagesStreamProvider);
-    return stream.when(
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (e, _) => Text('Error: $e'),
-      data: (items) {
-        final Message? pinned = items
-            .where((m) => m.pinned)
-            .cast<Message?>()
-            .firstWhere((m) => m != null, orElse: () => null);
-        if (pinned == null) {
-          return const EmptyState(
-            text: 'Viết điều bạn muốn nhắc mình…',
-            actionLabel: 'Viết lời nhắn đầu tiên',
-            route: '/compose',
-          );
-        }
-        return _PinnedDisplay(message: pinned);
-      },
+    final messageState = ref.watch(messageProvider);
+    final pinnedMessages = ref.watch(pinnedMessagesProvider);
+    final allMessages = ref.watch(messagesListProvider);
+
+    if (messageState.isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    if (messageState.error != null) {
+      return Text('Error: ${messageState.error}');
+    }
+
+    // Nếu không có message nào
+    if (allMessages.isEmpty) {
+      return const EmptyState(
+        text: 'Viết điều bạn muốn nhắc mình…',
+        actionLabel: 'Viết lời nhắn đầu tiên',
+        route: '/compose',
+      );
+    }
+
+    // Ưu tiên hiển thị message đã ghim, nếu không có thì hiển thị message mới nhất
+    final displayMessage = pinnedMessages.isNotEmpty
+        ? pinnedMessages.first
+        : allMessages.first;
+
+    return _PinnedDisplay(
+      message: displayMessage,
+      isPinned: pinnedMessages.isNotEmpty,
     );
   }
 }
 
 class _PinnedDisplay extends StatelessWidget {
   final Message message;
-  const _PinnedDisplay({required this.message});
+  final bool isPinned;
+  const _PinnedDisplay({required this.message, required this.isPinned});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +63,7 @@ class _PinnedDisplay extends StatelessWidget {
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.06),
+              color: Colors.black.withValues(alpha: 0.06),
               blurRadius: 16,
               offset: const Offset(0, 10),
             ),
@@ -74,7 +86,7 @@ class _PinnedDisplay extends StatelessWidget {
             ),
             const SizedBox(height: 6),
             Text(
-              'Pinned',
+              isPinned ? 'Pinned' : 'Latest',
               style: theme.textTheme.bodySmall?.copyWith(
                 color: palette?.accent,
               ),

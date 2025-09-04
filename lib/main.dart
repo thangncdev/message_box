@@ -24,13 +24,20 @@ class DearBoxApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final GoRouter router = ref.watch(routerProvider);
-    final locale = ref.watch(currentLocaleProvider);
-    final themeKey = ref.watch(currentThemeKeyProvider);
+    final appState = ref.watch(appProvider);
+
+    // Wait for app initialization
+    if (!appState.isInitialized) {
+      return const MaterialApp(
+        home: Scaffold(body: Center(child: CircularProgressIndicator())),
+      );
+    }
+
     return MaterialApp.router(
       onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
-      theme: buildAppTheme(themeKey),
+      theme: buildAppTheme(appState.themeKey),
       routerConfig: router,
-      locale: locale,
+      locale: appState.locale,
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
