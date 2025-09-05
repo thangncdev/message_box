@@ -12,7 +12,7 @@ struct Provider: TimelineProvider {
     // Method to retrieve data from Flutter app
     private func getDatafromFlutter()-> SimpleEntry{
         let userDefault = UserDefaults(suiteName: "group.com.thangnc.MessageBox")
-        let textFromFlutterApp = userDefault?.string(forKey: "message_from_flutter_app") ?? ""
+        let textFromFlutterApp = userDefault?.string(forKey: "message_from_flutter_app") ?? "Open app to write something"
 
         return SimpleEntry(date: Date(), text: textFromFlutterApp)
     }
