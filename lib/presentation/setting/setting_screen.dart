@@ -31,14 +31,16 @@ class SettingScreen extends ConsumerWidget {
         ),
         const SizedBox(height: 8),
         DropdownButtonFormField<String>(
-          value: currentLocale?.languageCode ?? 'system',
+          value: currentLocale?.languageCode ?? 'en',
           items: [
             DropdownMenuItem(
-              value: 'system',
-              child: Text(AppLocalizations.of(context)!.followSystem),
+              value: 'en',
+              child: Row(children: [Text('English')]),
             ),
-            DropdownMenuItem(value: 'en', child: Text('English')),
-            DropdownMenuItem(value: 'vi', child: Text('Tiếng Việt')),
+            DropdownMenuItem(
+              value: 'vi',
+              child: Row(children: [Text('Tiếng Việt')]),
+            ),
           ],
           onChanged: (v) async {
             if (v == 'system') {
@@ -83,7 +85,10 @@ class SettingScreen extends ConsumerWidget {
               color: Theme.of(context).colorScheme.primary,
             ),
             const SizedBox(width: 8),
-            const Text('Theme', style: TextStyle(fontWeight: FontWeight.w600)),
+            Text(
+              AppLocalizations.of(context)!.theme,
+              style: TextStyle(fontWeight: FontWeight.w600),
+            ),
           ],
         ),
         const SizedBox(height: 8),
@@ -121,14 +126,6 @@ class SettingScreen extends ConsumerWidget {
           icon: const Icon(Icons.arrow_drop_down_rounded),
         ),
         const SizedBox(height: 24),
-        // Reset to defaults button
-        ElevatedButton.icon(
-          onPressed: () async {
-            await ref.read(appProvider.notifier).resetToDefaults();
-          },
-          icon: const Icon(Icons.refresh_rounded),
-          label: const Text('Reset to Defaults'),
-        ),
         // Error display
         if (appState.error != null) ...[
           const SizedBox(height: 16),

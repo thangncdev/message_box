@@ -62,8 +62,7 @@ import 'app_localizations_vi.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale)
-    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -71,8 +70,7 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -84,18 +82,17 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
-      <LocalizationsDelegate<dynamic>>[
-        delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+    delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+  ];
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('en'),
-    Locale('vi'),
+    Locale('vi')
   ];
 
   /// No description provided for @appTitle.
@@ -209,7 +206,7 @@ abstract class AppLocalizations {
   /// No description provided for @emptyFeaturedText.
   ///
   /// In en, this message translates to:
-  /// **'Write what you want to remind yourself…'**
+  /// **'Write a note you’d like to leave for yourself...'**
   String get emptyFeaturedText;
 
   /// No description provided for @emptyFeaturedAction.
@@ -311,20 +308,80 @@ abstract class AppLocalizations {
   /// No description provided for @yourPersonalMessageBox.
   ///
   /// In en, this message translates to:
-  /// **'Your personal message box'**
+  /// **'yourPersonalMessageBox'**
   String get yourPersonalMessageBox;
 
   /// No description provided for @makeChangesToYourMessage.
   ///
   /// In en, this message translates to:
-  /// **'Make changes to your message'**
+  /// **'makeChangesToYourMessage'**
   String get makeChangesToYourMessage;
 
-  /// No description provided for @yourMessage.
+  /// No description provided for @widgetGuideTitle.
   ///
   /// In en, this message translates to:
-  /// **'Your message'**
-  String get yourMessage;
+  /// **'Display your message on home screen!'**
+  String get widgetGuideTitle;
+
+  /// No description provided for @widgetGuideDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'You can add a widget to your home screen to quickly view your message without opening the app.'**
+  String get widgetGuideDescription;
+
+  /// No description provided for @widgetGuideButton.
+  ///
+  /// In en, this message translates to:
+  /// **'View Guide'**
+  String get widgetGuideButton;
+
+  /// No description provided for @next.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get next;
+
+  /// No description provided for @getStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Get Started'**
+  String get getStarted;
+
+  /// No description provided for @introTitle1.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Personal Message Box'**
+  String get introTitle1;
+
+  /// No description provided for @introContent1.
+  ///
+  /// In en, this message translates to:
+  /// **'Create and store your personal messages, thoughts, and reminders in one secure place.'**
+  String get introContent1;
+
+  /// No description provided for @introTitle2.
+  ///
+  /// In en, this message translates to:
+  /// **'Make Changes to Your Message'**
+  String get introTitle2;
+
+  /// No description provided for @introContent2.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit, pin, or organize your messages however you like. Your thoughts, your way.'**
+  String get introContent2;
+
+  /// No description provided for @introTitle3.
+  ///
+  /// In en, this message translates to:
+  /// **'Widget on Home Screen'**
+  String get introTitle3;
+
+  /// No description provided for @introContent3.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a widget to your home screen to quickly view your message without opening the app.'**
+  String get introContent3;
 
   /// No description provided for @more.
   ///
@@ -332,35 +389,11 @@ abstract class AppLocalizations {
   /// **'More'**
   String get more;
 
-  /// No description provided for @feedback.
-  ///
-  /// In en, this message translates to:
-  /// **'Feedback'**
-  String get feedback;
-
-  /// No description provided for @rateThisApp.
-  ///
-  /// In en, this message translates to:
-  /// **'Rate this app'**
-  String get rateThisApp;
-
   /// No description provided for @settingsSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'App preferences and appearance'**
+  /// **'Customize your experience'**
   String get settingsSubtitle;
-
-  /// No description provided for @feedbackSubtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Tell us what you think'**
-  String get feedbackSubtitle;
-
-  /// No description provided for @rateAppSubtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Leave a review on the store'**
-  String get rateAppSubtitle;
 
   /// No description provided for @widgetGuide.
   ///
@@ -371,66 +404,131 @@ abstract class AppLocalizations {
   /// No description provided for @widgetGuideSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'How to add DearBox to Home Screen'**
+  /// **'Learn how to add widget'**
   String get widgetGuideSubtitle;
 
-  /// No description provided for @guideAppBarTitle.
+  /// No description provided for @feedback.
   ///
   /// In en, this message translates to:
-  /// **'Add DearBox Widget'**
-  String get guideAppBarTitle;
+  /// **'Feedback'**
+  String get feedback;
+
+  /// No description provided for @feedbackSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Share your thoughts with us'**
+  String get feedbackSubtitle;
+
+  /// No description provided for @rateThisApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate This App'**
+  String get rateThisApp;
+
+  /// No description provided for @rateAppSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Help us improve'**
+  String get rateAppSubtitle;
+
+  /// No description provided for @theme.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get theme;
+
+  /// No description provided for @guideTitleIos.
+  ///
+  /// In en, this message translates to:
+  /// **'How to Add Widget'**
+  String get guideTitleIos;
+
+  /// No description provided for @guideStepIosJiggle.
+  ///
+  /// In en, this message translates to:
+  /// **'Long press on an empty area of your home screen until apps start jiggling'**
+  String get guideStepIosJiggle;
+
+  /// No description provided for @guideStepIosTapPlus.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the + button in the top-left corner'**
+  String get guideStepIosTapPlus;
+
+  /// No description provided for @guideStepIosFindInGallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Search for \'DearBox\' in the widget gallery'**
+  String get guideStepIosFindInGallery;
+
+  /// No description provided for @guideStepIosChooseStyle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your preferred widget style and size'**
+  String get guideStepIosChooseStyle;
+
+  /// No description provided for @guideStepIosTapAddWidget.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap \'Add Widget\' to add it to your home screen'**
+  String get guideStepIosTapAddWidget;
+
+  /// No description provided for @guideStepIosDragPosition.
+  ///
+  /// In en, this message translates to:
+  /// **'Drag the widget to your desired position'**
+  String get guideStepIosDragPosition;
+
+  /// No description provided for @guideStepIosTapDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap \'Done\' in the top-right corner to finish'**
+  String get guideStepIosTapDone;
 
   /// No description provided for @guideTitle.
   ///
   /// In en, this message translates to:
-  /// **'How to add DearBox widget to the Home Screen'**
+  /// **'Widget Setup Guide'**
   String get guideTitle;
 
   /// No description provided for @guideSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Quick steps to start brightening your day ✨'**
+  /// **'Follow these steps to add DearBox widget to your home screen'**
   String get guideSubtitle;
 
-  /// iOS specific guide title
-  String get guideTitleIos;
-
-  /// iOS Steps
-  String get guideStepIosJiggle;
-  String get guideStepIosTapPlus;
-  String get guideStepIosFindInGallery;
-  String get guideStepIosChooseStyle;
-  String get guideStepIosTapAddWidget;
-  String get guideStepIosDragPosition;
-  String get guideStepIosTapDone;
-
-  /// No description provided for @guideStepLongPress.
-  String get guideStepLongPress;
-
-  /// No description provided for @guideStepSelectWidgets.
-  String get guideStepSelectWidgets;
-
-  /// No description provided for @guideStepFindDearBox.
-  String get guideStepFindDearBox;
-
-  /// No description provided for @guideStepChooseStyle.
-  String get guideStepChooseStyle;
-
-  /// No description provided for @guideStepTapAdd.
-  String get guideStepTapAdd;
-
-  /// No description provided for @guideStepPlaceAnywhere.
-  String get guideStepPlaceAnywhere;
-
   /// No description provided for @guideFooter.
+  ///
+  /// In en, this message translates to:
+  /// **'Need help? Contact us for support'**
   String get guideFooter;
 
   /// No description provided for @done.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
   String get done;
+
+  /// No description provided for @selectLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Language'**
+  String get selectLanguage;
+
+  /// No description provided for @selectLanguageSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your preferred language to get started'**
+  String get selectLanguageSubtitle;
+
+  /// No description provided for @continueButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get continueButton;
 }
 
-class _AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -439,26 +537,25 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['en', 'vi'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en', 'vi'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
+
+
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'en':
-      return AppLocalizationsEn();
-    case 'vi':
-      return AppLocalizationsVi();
+    case 'en': return AppLocalizationsEn();
+    case 'vi': return AppLocalizationsVi();
   }
 
   throw FlutterError(
     'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
     'an issue with the localizations generation tool. Please file an issue '
     'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.',
+    'that was used.'
   );
 }

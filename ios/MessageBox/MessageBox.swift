@@ -84,7 +84,7 @@ struct MessageBox: Widget {
                     .background(Color(.systemBackground))
             }
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("Dear Box")
+        .description("This is a widget for Dear Box.")
     }
 }

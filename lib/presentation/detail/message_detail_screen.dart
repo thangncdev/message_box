@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:message_box/assets/images/app_images.dart';
 import 'package:message_box/core/utils/date_format.dart';
 import 'package:message_box/l10n/app_localizations.dart';
 import 'package:message_box/presentation/providers.dart';
@@ -74,24 +75,41 @@ class MessageDetailScreen extends ConsumerWidget {
                     items.add(
                       PopupMenuItem<_MenuOption>(
                         value: _MenuOption.edit,
-                        child: Text(AppLocalizations.of(context)!.edit),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.edit_rounded),
+                            const SizedBox(width: 8),
+                            Text(AppLocalizations.of(context)!.edit),
+                          ],
+                        ),
                       ),
                     );
                     if (!(m.pinned)) {
                       items.add(
                         PopupMenuItem<_MenuOption>(
                           value: _MenuOption.pin,
-                          child: Text(AppLocalizations.of(context)!.pin),
+                          child: Row(
+                            children: [
+                              const Icon(Icons.push_pin),
+                              const SizedBox(width: 8),
+                              Text(AppLocalizations.of(context)!.pin),
+                            ],
+                          ),
                         ),
                       );
                     }
                     items.add(
                       PopupMenuItem<_MenuOption>(
                         value: _MenuOption.delete,
-                        child: Text(AppLocalizations.of(context)!.delete),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.delete_rounded),
+                            const SizedBox(width: 8),
+                            Text(AppLocalizations.of(context)!.delete),
+                          ],
+                        ),
                       ),
                     );
-                    items.add(const PopupMenuDivider(height: 8));
 
                     return items;
                   },
@@ -110,39 +128,55 @@ class MessageDetailScreen extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         TweenAnimationBuilder<double>(
-                          duration: const Duration(milliseconds: 700),
+                          duration: const Duration(milliseconds: 500),
                           curve: Curves.easeOutCubic,
-                          tween: Tween(begin: 0.0, end: 1.0),
+                          tween: Tween(begin: -20.0, end: 1.0),
                           builder: (context, t, child) {
-                            return Opacity(
-                              opacity: t,
-                              child: Transform.translate(
-                                offset: Offset(0, (1 - t) * 24),
-                                child: child,
-                              ),
+                            return Transform.translate(
+                              offset: Offset(0, (1 - t) * 24),
+                              child: child,
                             );
                           },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).cardColor,
-                              borderRadius: BorderRadius.circular(16),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.08),
-                                  blurRadius: 16,
-                                  offset: const Offset(0, 8),
+                          child: Stack(
+                            children: [
+                              Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).cardColor,
+                                  borderRadius: BorderRadius.circular(16),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.08),
+                                      blurRadius: 16,
+                                      offset: const Offset(0, 8),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 20,
-                            ),
-                            child: Text(
-                              m.content,
-                              style: const TextStyle(fontSize: 20, height: 1.5),
-                              textAlign: TextAlign.left,
-                            ),
+                                padding: const EdgeInsets.only(
+                                  left: 16,
+                                  right: 16,
+                                  top: 30,
+                                  bottom: 20,
+                                ),
+                                child: Text(
+                                  m.content,
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    height: 1.5,
+                                  ),
+                                  textAlign: TextAlign.left,
+                                ),
+                              ),
+                              Positioned(
+                                top: 12,
+                                right: 12,
+                                child: Image.asset(
+                                  AppImages.pin_paper,
+                                  width: 24,
+                                  height: 24,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                         const SizedBox(height: 10),

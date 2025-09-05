@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:message_box/assets/images/app_images.dart';
 import 'package:message_box/core/theme.dart';
 import 'package:message_box/presentation/widgets/base_app_bar.dart';
 import 'package:message_box/presentation/widgets/base_screen.dart';
@@ -13,13 +14,41 @@ class GuideScreen extends StatelessWidget {
     final palette = Theme.of(context).extension<PastelPalette>()!;
     final t = AppLocalizations.of(context)!;
     final steps = <_StepItem>[
-      _StepItem(Icons.touch_app_rounded, t.guideStepIosJiggle),
-      _StepItem(Icons.add_circle_outline_rounded, t.guideStepIosTapPlus),
-      _StepItem(Icons.view_quilt_rounded, t.guideStepIosFindInGallery),
-      _StepItem(Icons.style_rounded, t.guideStepIosChooseStyle),
-      _StepItem(Icons.add_box_rounded, t.guideStepIosTapAddWidget),
-      _StepItem(Icons.open_with_rounded, t.guideStepIosDragPosition),
-      _StepItem(Icons.task_alt_rounded, t.guideStepIosTapDone),
+      _StepItem(
+        Icons.touch_app_rounded,
+        t.guideStepIosJiggle,
+        AppImages.guide_1,
+      ),
+      _StepItem(
+        Icons.add_circle_outline_rounded,
+        t.guideStepIosTapPlus,
+        AppImages.guide_2,
+      ),
+      _StepItem(
+        Icons.view_quilt_rounded,
+        t.guideStepIosFindInGallery,
+        AppImages.guide_3,
+      ),
+      _StepItem(
+        Icons.style_rounded,
+        t.guideStepIosChooseStyle,
+        AppImages.guide_5,
+      ),
+      _StepItem(
+        Icons.add_box_rounded,
+        t.guideStepIosTapAddWidget,
+        AppImages.guide_4,
+      ),
+      _StepItem(
+        Icons.open_with_rounded,
+        t.guideStepIosDragPosition,
+        AppImages.guide_5,
+      ),
+      _StepItem(
+        Icons.task_alt_rounded,
+        t.guideStepIosTapDone,
+        AppImages.guide_5,
+      ),
     ];
 
     return BaseScreen(
@@ -84,7 +113,7 @@ class GuideScreen extends StatelessWidget {
                 separatorBuilder: (_, __) => const SizedBox(height: 10),
                 itemBuilder: (context, i) {
                   final s = steps[i];
-                  return _StepCard(icon: s.icon, text: s.text);
+                  return _StepCard(icon: s.icon, text: s.text, image: s.image);
                 },
               ),
             ),
@@ -128,7 +157,12 @@ class GuideScreen extends StatelessWidget {
 class _StepCard extends StatelessWidget {
   final IconData icon;
   final String text;
-  const _StepCard({required this.icon, required this.text});
+  final String image;
+  const _StepCard({
+    required this.icon,
+    required this.text,
+    required this.image,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -147,24 +181,34 @@ class _StepCard extends StatelessWidget {
         ],
       ),
       padding: const EdgeInsets.all(14),
-      child: Row(
+      child: Column(
         children: [
-          Container(
-            width: 44,
-            height: 44,
-            decoration: BoxDecoration(
-              color: palette.cardA,
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: palette.borderColor),
-            ),
-            child: Icon(icon, color: palette.accent),
+          Row(
+            children: [
+              Container(
+                width: 44,
+                height: 44,
+                decoration: BoxDecoration(
+                  color: palette.cardA,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: palette.borderColor),
+                ),
+                child: Icon(icon, color: palette.accent),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  text,
+                  style: TextStyle(fontSize: 14, color: palette.onCard),
+                ),
+              ),
+            ],
           ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Text(
-              text,
-              style: TextStyle(fontSize: 14, color: palette.onCard),
-            ),
+          const SizedBox(height: 12),
+          Image.asset(
+            image,
+            width: MediaQuery.of(context).size.width * 0.8,
+            fit: BoxFit.cover,
           ),
         ],
       ),
@@ -175,5 +219,6 @@ class _StepCard extends StatelessWidget {
 class _StepItem {
   final IconData icon;
   final String text;
-  _StepItem(this.icon, this.text);
+  final String image;
+  _StepItem(this.icon, this.text, this.image);
 }

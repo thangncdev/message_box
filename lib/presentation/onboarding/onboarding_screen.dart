@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:message_box/assets/images/app_images.dart';
 import 'package:message_box/core/theme.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:message_box/services/shared_preferences_service.dart';
+import 'package:message_box/l10n/app_localizations.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -15,24 +17,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   int _index = 0;
 
   final List<_Slide> _slides = const [
-    _Slide(
-      title: 'DearBox',
-      subtitle: 'A box for your thoughts 💌',
-      emoji: '📦',
-      bullets: [],
-    ),
-    _Slide(
-      title: 'Write & Feel',
-      subtitle: 'Write down your thoughts & feelings ✍️',
-      emoji: '📝',
-      bullets: [],
-    ),
-    _Slide(
-      title: 'Save & Reflect',
-      subtitle: 'Save quotes • Reflect anytime ✨',
-      emoji: '🌸',
-      bullets: [],
-    ),
+    _Slide(index: 0, emoji: '📦', image: AppImages.intro_1),
+    _Slide(index: 1, emoji: '📝', image: AppImages.intro_2),
+    _Slide(index: 2, emoji: '🌱', image: AppImages.intro_3),
   ];
 
   @override
@@ -74,7 +61,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   if (_index < _slides.length - 1)
                     Expanded(
                       child: _SoftButton(
-                        label: 'Next',
+                        label: AppLocalizations.of(context)!.next,
                         onPressed: () {
                           _controller.nextPage(
                             duration: const Duration(milliseconds: 320),
@@ -86,10 +73,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   else
                     Expanded(
                       child: _SoftButton(
-                        label: 'Get Started',
+                        label: AppLocalizations.of(context)!.getStarted,
                         onPressed: () async {
-                          final prefs = await SharedPreferences.getInstance();
-                          await prefs.setBool('seen_onboarding', true);
+                          final prefsService =
+                              await SharedPreferencesService.getInstance();
+                          await prefsService.setSeenOnboarding(true);
                           if (mounted) context.go('/');
                         },
                       ),
@@ -108,12 +96,39 @@ class _OnboardCard extends StatelessWidget {
   final _Slide slide;
   const _OnboardCard({required this.slide});
 
+  String getTitle(BuildContext context) {
+    switch (slide.index) {
+      case 0:
+        return AppLocalizations.of(context)!.introTitle1;
+      case 1:
+        return AppLocalizations.of(context)!.introTitle2;
+      case 2:
+        return AppLocalizations.of(context)!.introTitle3;
+      default:
+        return '';
+    }
+  }
+
+  String getContent(BuildContext context) {
+    switch (slide.index) {
+      case 0:
+        return AppLocalizations.of(context)!.introContent1;
+      case 1:
+        return AppLocalizations.of(context)!.introContent2;
+      case 2:
+        return AppLocalizations.of(context)!.introContent3;
+      default:
+        return '';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final palette = Theme.of(context).extension<PastelPalette>()!;
+
     return TweenAnimationBuilder<double>(
       tween: Tween(begin: 0, end: 1),
-      duration: const Duration(milliseconds: 420),
+      duration: const Duration(milliseconds: 800),
       curve: Curves.easeOut,
       builder: (context, t, child) => Opacity(
         opacity: t,
@@ -137,6 +152,7 @@ class _OnboardCard extends StatelessWidget {
         ),
         padding: const EdgeInsets.fromLTRB(20, 28, 20, 24),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
@@ -159,7 +175,7 @@ class _OnboardCard extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Text(
-              slide.title,
+              getTitle(context),
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 22,
@@ -170,7 +186,7 @@ class _OnboardCard extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              slide.subtitle,
+              getContent(context),
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,
@@ -178,27 +194,17 @@ class _OnboardCard extends StatelessWidget {
                 color: palette.onCard.withValues(alpha: 0.75),
               ),
             ),
-            if (slide.bullets.isNotEmpty) const SizedBox(height: 12),
-            for (final b in slide.bullets)
-              Padding(
-                padding: const EdgeInsets.only(top: 6),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text('• ', style: TextStyle(fontSize: 16)),
-                    Flexible(
-                      child: Text(
-                        b,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: palette.onCard.withValues(alpha: 0.8),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+            const SizedBox(height: 40),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(24),
+              child: Image.asset(
+                slide.image,
+                width: MediaQuery.of(context).size.width * 0.6,
+                height: MediaQuery.of(context).size.width * 0.6,
+                fit: BoxFit.cover,
               ),
+            ),
+            const SizedBox(height: 20),
           ],
         ),
       ),
@@ -264,14 +270,8 @@ class _Dots extends StatelessWidget {
 }
 
 class _Slide {
-  final String title;
-  final String subtitle;
+  final int index;
   final String emoji;
-  final List<String> bullets;
-  const _Slide({
-    required this.title,
-    required this.subtitle,
-    required this.emoji,
-    required this.bullets,
-  });
+  final String image;
+  const _Slide({required this.index, required this.emoji, required this.image});
 }

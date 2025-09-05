@@ -12,6 +12,5 @@ import SwiftUI
 struct MessageBoxBundle: WidgetBundle {
     var body: some Widget {
         MessageBox()
-        MessageBoxControl()
     }
 }

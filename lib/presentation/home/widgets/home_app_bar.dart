@@ -51,7 +51,7 @@ class HomeAppBar extends StatelessWidget {
           ),
           child: IconButton(
             onPressed: () => context.push('/more'),
-            icon: Icon(Icons.more_horiz_rounded, color: palette.accent),
+            icon: Icon(Icons.menu, color: palette.accent),
             tooltip: 'More',
           ),
         ),

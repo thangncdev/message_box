@@ -1,6 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:message_box/presentation/providers.dart';
+import 'package:message_box/presentation/widgets/widget_guide_modal.dart';
 import 'package:message_box/services/widget_service.dart';
+import 'package:message_box/services/shared_preferences_service.dart';
 
 final int maxLength = 1000;
 
@@ -30,7 +33,7 @@ class ComposeController extends StateNotifier<ComposeState> {
     state = state.copyWith(content: value, error: error);
   }
 
-    Future<bool> saveNew() async {
+  Future<bool> saveNew() async {
     final trimmed = state.content.trim();
     if (trimmed.isEmpty || trimmed.runes.length > maxLength) return false;
 
@@ -45,8 +48,9 @@ class ComposeController extends StateNotifier<ComposeState> {
 
   Future<bool> saveEdit(String id) async {
     final trimmed = state.content.trim();
-    if (trimmed.isEmpty || trimmed.runes.length > maxLength) 
-    return false;
+    if (trimmed.isEmpty || trimmed.runes.length > maxLength) {
+      return false;
+    }
 
     final success = await ref
         .read(messageProvider.notifier)
@@ -55,6 +59,18 @@ class ComposeController extends StateNotifier<ComposeState> {
       await WidgetService.updateWidget(content: trimmed);
     }
     return success;
+  }
+
+  Future<void> checkShowWidgetGuide(BuildContext context) async {
+    final prefsService = await SharedPreferencesService.getInstance();
+    final hasSeenGuide = prefsService.getHasSeenWidgetGuide();
+    if (!hasSeenGuide) {
+      showDialog(
+        context: context,
+        barrierDismissible: false, // User cannot dismiss by tapping outside
+        builder: (context) => const WidgetGuideModal(),
+      );
+    }
   }
 }
 

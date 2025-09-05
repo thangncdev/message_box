@@ -46,7 +46,6 @@ class _ListMessagesState extends ConsumerState<ListMessages> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Search field (refactored)
         AnimatedSearchField(
           hintText: AppLocalizations.of(context)!.searchHint,
           onChanged: (v) => setState(() => _query = v),
@@ -172,21 +171,35 @@ class _ListMessagesState extends ConsumerState<ListMessages> {
                               itemBuilder: (context) => [
                                 PopupMenuItem(
                                   value: 'edit',
-                                  child: Text(
-                                    AppLocalizations.of(context)!.edit,
+                                  child: Row(
+                                    children: [
+                                      const Icon(Icons.edit_rounded),
+                                      const SizedBox(width: 8),
+                                      Text(AppLocalizations.of(context)!.edit),
+                                    ],
                                   ),
                                 ),
                                 if (!m.pinned)
                                   PopupMenuItem(
                                     value: 'pin',
-                                    child: Text(
-                                      AppLocalizations.of(context)!.pin,
+                                    child: Row(
+                                      children: [
+                                        const Icon(Icons.push_pin),
+                                        const SizedBox(width: 8),
+                                        Text(AppLocalizations.of(context)!.pin),
+                                      ],
                                     ),
                                   ),
                                 PopupMenuItem(
                                   value: 'delete',
-                                  child: Text(
-                                    AppLocalizations.of(context)!.delete,
+                                  child: Row(
+                                    children: [
+                                      const Icon(Icons.delete_rounded),
+                                      const SizedBox(width: 8),
+                                      Text(
+                                        AppLocalizations.of(context)!.delete,
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ],

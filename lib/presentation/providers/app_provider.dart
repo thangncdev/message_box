@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:message_box/core/theme.dart';
+import 'package:message_box/core/constants/shared_preferences_keys.dart';
+import 'package:message_box/services/shared_preferences_service.dart';
 
 /// App state class chứa tất cả trạng thái chung của ứng dụng
 class AppState {
@@ -41,15 +42,17 @@ class AppProvider extends StateNotifier<AppState> {
   /// Khởi tạo app và load các setting đã lưu
   Future<void> _initialize() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
+      final prefsService = await SharedPreferencesService.getInstance();
 
       // Load theme setting
-      final savedTheme = prefs.getString('theme_key') ?? AppThemeKeys.honey;
+      final savedTheme = prefsService.getThemeKey(
+        defaultValue: AppThemeKeys.honey,
+      );
 
       // Load locale setting
-      final savedLocaleCode = prefs.getString('locale_code');
+      final savedLocaleCode = prefsService.getLocaleCode();
       Locale? savedLocale;
-      if (savedLocaleCode != null) {
+      if (savedLocaleCode.isNotEmpty) {
         savedLocale = Locale(savedLocaleCode);
       }
 
@@ -69,8 +72,8 @@ class AppProvider extends StateNotifier<AppState> {
   /// Thay đổi theme
   Future<void> changeTheme(String themeKey) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setString('theme_key', themeKey);
+      final prefsService = await SharedPreferencesService.getInstance();
+      await prefsService.setThemeKey(themeKey);
 
       state = state.copyWith(themeKey: themeKey);
     } catch (e) {
@@ -81,12 +84,12 @@ class AppProvider extends StateNotifier<AppState> {
   /// Thay đổi ngôn ngữ
   Future<void> changeLocale(Locale? locale) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
+      final prefsService = await SharedPreferencesService.getInstance();
 
       if (locale != null) {
-        await prefs.setString('locale_code', locale.languageCode);
+        await prefsService.setLocaleCode(locale.languageCode);
       } else {
-        await prefs.remove('locale_code');
+        await prefsService.remove(SharedPreferencesKeys.localeCode);
       }
 
       state = state.copyWith(locale: locale);
@@ -98,9 +101,9 @@ class AppProvider extends StateNotifier<AppState> {
   /// Reset về setting mặc định
   Future<void> resetToDefaults() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.remove('theme_key');
-      await prefs.remove('locale_code');
+      final prefsService = await SharedPreferencesService.getInstance();
+      await prefsService.remove(SharedPreferencesKeys.themeKey);
+      await prefsService.remove(SharedPreferencesKeys.localeCode);
 
       state = state.copyWith(themeKey: AppThemeKeys.honey, locale: null);
     } catch (e) {

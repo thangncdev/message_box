@@ -24,7 +24,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get editMessage => 'Edit Message';
 
   @override
-  String get searchHint => 'Search a old message...';
+  String get searchHint => 'Search...';
 
   @override
   String get newest => 'Newest';
@@ -117,96 +117,125 @@ class AppLocalizationsEn extends AppLocalizations {
   String get hoursAgo => 'h ago';
 
   @override
-  String get yourPersonalMessageBox => 'Your personal message box';
+  String get yourPersonalMessageBox => 'Note it. Own it';
 
   @override
-  String get makeChangesToYourMessage => 'Make changes to your message';
+  String get makeChangesToYourMessage => 'Update your message';
 
   @override
-  String get yourMessage => 'Your message';
+  String get widgetGuideTitle => 'Display your message on home screen!';
+
+  @override
+  String get widgetGuideDescription =>
+      'You can add a widget to your home screen to quickly view your message without opening the app.';
+
+  @override
+  String get widgetGuideButton => 'View Guide';
+
+  @override
+  String get next => 'Next';
+
+  @override
+  String get getStarted => 'Get Started';
+
+  @override
+  String get introTitle1 => 'Dear Box';
+
+  @override
+  String get introContent1 => 'A box for your thoughts 💌';
+
+  @override
+  String get introTitle2 => 'Write & Reflect';
+
+  @override
+  String get introContent2 =>
+      'Write your reminders, encouragement, or positive messages you want to send to yourself. ✍️';
+
+  @override
+  String get introTitle3 => 'Always by Your Side';
+
+  @override
+  String get introContent3 =>
+      'Quickly view your message from your home screen and notification as a warm reminder every day ✨';
 
   @override
   String get more => 'More';
 
   @override
-  String get feedback => 'Feedback';
-
-  @override
-  String get rateThisApp => 'Rate this app';
-
-  @override
-  String get settingsSubtitle => 'App preferences and appearance';
-
-  @override
-  String get feedbackSubtitle => 'Tell us what you think';
-
-  @override
-  String get rateAppSubtitle => 'Leave a review on the store';
+  String get settingsSubtitle => 'Customize your experience';
 
   @override
   String get widgetGuide => 'Widget Guide';
 
   @override
-  String get widgetGuideSubtitle => 'How to add DearBox to Home Screen';
+  String get widgetGuideSubtitle => 'Learn how to add widget';
 
   @override
-  String get guideAppBarTitle => 'Add DearBox Widget';
+  String get feedback => 'Feedback';
 
   @override
-  String get guideTitle => 'How to add DearBox widget to the Home Screen';
+  String get feedbackSubtitle => 'Share your thoughts with us';
 
   @override
-  String get guideSubtitle => 'Quick steps to start brightening your day ✨';
+  String get rateThisApp => 'Rate This App';
 
   @override
-  String get guideTitleIos =>
-      'How to add DearBox widget to the Home Screen (iOS)';
+  String get rateAppSubtitle => 'Help us improve';
+
+  @override
+  String get theme => 'Theme';
+
+  @override
+  String get guideTitleIos => 'How to Add Widget';
 
   @override
   String get guideStepIosJiggle =>
-      'Long press on an empty area until apps jiggle.';
+      'Press and hold an empty area on the home screen until the apps start to jiggle';
 
   @override
-  String get guideStepIosTapPlus => 'Tap the + button at the top-left corner.';
+  String get guideStepIosTapPlus =>
+      'Tap the "Edit" button in the upper left corner of the screen\n Then tap the "Add Widget"';
 
   @override
   String get guideStepIosFindInGallery =>
-      'In Widget Gallery, scroll and find DearBox.';
+      'Search for \'DearBox\' in the widget gallery';
 
   @override
-  String get guideStepIosChooseStyle => 'Choose a widget style.';
+  String get guideStepIosChooseStyle =>
+      'Choose your preferred widget style and size';
 
   @override
-  String get guideStepIosTapAddWidget => 'Tap Add Widget.';
+  String get guideStepIosTapAddWidget =>
+      'Tap \'Add Widget\' to add it to your home screen';
 
   @override
-  String get guideStepIosDragPosition => 'Drag it to your desired position.';
+  String get guideStepIosDragPosition =>
+      'Drag the widget to your desired position';
 
   @override
-  String get guideStepIosTapDone => 'Tap Done at the top-right to finish.';
+  String get guideStepIosTapDone =>
+      'Tap \'Done\' in the top-right corner to finish';
 
   @override
-  String get guideStepLongPress => 'Long press on Home Screen.';
+  String get guideTitle => 'Widget Setup Guide';
 
   @override
-  String get guideStepSelectWidgets => 'Select "Widgets".';
+  String get guideSubtitle =>
+      'Follow these steps to add DearBox widget to your home screen';
 
   @override
-  String get guideStepFindDearBox => 'Find "DearBox".';
-
-  @override
-  String get guideStepChooseStyle =>
-      'Choose a style (Today’s Note / Random Quote).';
-
-  @override
-  String get guideStepTapAdd => 'Tap "Add".';
-
-  @override
-  String get guideStepPlaceAnywhere => 'Place it anywhere you like.';
-
-  @override
-  String get guideFooter => 'Let DearBox brighten your day ✨';
+  String get guideFooter => 'Need help? Contact us for support';
 
   @override
   String get done => 'Done';
+
+  @override
+  String get selectLanguage => 'Select Language';
+
+  @override
+  String get selectLanguageSubtitle =>
+      'Choose your preferred language to get started';
+
+  @override
+  String get continueButton => 'Continue';
 }

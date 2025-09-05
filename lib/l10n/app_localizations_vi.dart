@@ -24,7 +24,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get editMessage => 'Sửa lời nhắn';
 
   @override
-  String get searchHint => 'Tìm một lời nhắn cũ...';
+  String get searchHint => 'Tìm kiếm...';
 
   @override
   String get newest => 'Mới nhất';
@@ -63,7 +63,8 @@ class AppLocalizationsVi extends AppLocalizations {
   String get unpinned => 'Bỏ ghim';
 
   @override
-  String get emptyFeaturedText => 'Vài lời nhắn nhủ cho chính mình…';
+  String get emptyFeaturedText =>
+      'Viết một lời nhắn bạn muốn tự dành cho chính mình...';
 
   @override
   String get emptyFeaturedAction => 'Viết lời nhắn đầu tiên';
@@ -116,96 +117,124 @@ class AppLocalizationsVi extends AppLocalizations {
   String get hoursAgo => 'giờ trước';
 
   @override
-  String get yourPersonalMessageBox => 'Hộp tin nhắn cá nhân của bạn';
+  String get yourPersonalMessageBox => 'Note it. Own it';
 
   @override
-  String get makeChangesToYourMessage => 'Sửa lời nhắn của bạn';
+  String get makeChangesToYourMessage => 'Cập nhật lời nhắn của bạn';
 
   @override
-  String get yourMessage => 'Lời nhắn của bạn';
+  String get widgetGuideTitle => 'Hiển thị lời nhắn trên màn hình chính!';
+
+  @override
+  String get widgetGuideDescription =>
+      'Bạn có thể thêm widget vào màn hình chính để xem nhanh lời nhắn mà không cần mở ứng dụng.';
+
+  @override
+  String get widgetGuideButton => 'Xem hướng dẫn';
+
+  @override
+  String get next => 'Tiếp theo';
+
+  @override
+  String get getStarted => 'Bắt đầu';
+
+  @override
+  String get introTitle1 => 'Dear Box';
+
+  @override
+  String get introContent1 => 'Hộp suy nghĩ của bạn 💌';
+
+  @override
+  String get introTitle2 => 'Viết & Cảm nhận';
+
+  @override
+  String get introContent2 =>
+      'Viết lại những lời nhắc nhở, khích lệ hoặc những điều tốt đẹp mà bạn muốn gửi cho chính mình. ✍️';
+
+  @override
+  String get introTitle3 => 'Luôn bên cạnh bạn';
+
+  @override
+  String get introContent3 =>
+      'Dễ dàng xem từ màn hình chính và thông báo như một lời nhắc nhở ấm áp mỗi ngày ✨';
 
   @override
   String get more => 'Thêm';
 
   @override
-  String get feedback => 'Phản hồi';
-
-  @override
-  String get rateThisApp => 'Đánh giá ứng dụng';
-
-  @override
-  String get settingsSubtitle => 'Tùy chỉnh và giao diện ứng dụng';
-
-  @override
-  String get feedbackSubtitle => 'Cho chúng tôi biết ý kiến của bạn';
-
-  @override
-  String get rateAppSubtitle => 'Để lại đánh giá trên cửa hàng';
+  String get settingsSubtitle => 'Tùy chỉnh trải nghiệm của bạn';
 
   @override
   String get widgetGuide => 'Hướng dẫn Widget';
 
   @override
-  String get widgetGuideSubtitle => 'Cách thêm DearBox lên Màn hình chính';
+  String get widgetGuideSubtitle => 'Học cách thêm widget';
 
   @override
-  String get guideAppBarTitle => 'Thêm Widget DearBox';
+  String get feedback => 'Phản hồi';
 
   @override
-  String get guideTitle => 'Cách thêm widget DearBox lên Màn hình chính';
+  String get feedbackSubtitle => 'Chia sẻ suy nghĩ của bạn với chúng tôi';
 
   @override
-  String get guideSubtitle => 'Vài bước nhanh để ngày của bạn tươi sáng hơn ✨';
+  String get rateThisApp => 'Đánh giá ứng dụng';
 
   @override
-  String get guideTitleIos =>
-      'Cách thêm widget DearBox lên Màn hình chính (iOS)';
+  String get rateAppSubtitle => 'Giúp chúng tôi cải thiện';
 
   @override
-  String get guideStepIosJiggle => 'Chạm giữ vùng trống đến khi ứng dụng rung.';
+  String get theme => 'Giao diện';
 
   @override
-  String get guideStepIosTapPlus => 'Nhấn nút + ở góc trên bên trái.';
+  String get guideTitleIos => 'Cách thêm Widget';
+
+  @override
+  String get guideStepIosJiggle =>
+      'Nhấn giữ vào vùng trống trên màn hình chính cho đến khi các ứng dụng bắt đầu rung lắc';
+
+  @override
+  String get guideStepIosTapPlus =>
+      'Nhấn vào nút "Sửa" ở góc trên bên trái màn hình\n Sau đó chọn "Thêm tiện ích"';
 
   @override
   String get guideStepIosFindInGallery =>
-      'Trong Thư viện Widget, cuộn và tìm DearBox.';
+      'Tìm kiếm \'DearBox\' trong thư viện widget';
 
   @override
-  String get guideStepIosChooseStyle => 'Chọn kiểu widget.';
+  String get guideStepIosChooseStyle =>
+      'Chọn kiểu và kích thước widget bạn muốn';
 
   @override
-  String get guideStepIosTapAddWidget => 'Nhấn Thêm Widget.';
+  String get guideStepIosTapAddWidget =>
+      'Nhấn \'Thêm tiện ích\' để thêm vào màn hình chính';
 
   @override
-  String get guideStepIosDragPosition => 'Kéo đến vị trí bạn muốn.';
+  String get guideStepIosDragPosition => 'Kéo widget đến vị trí mong muốn';
 
   @override
   String get guideStepIosTapDone =>
-      'Nhấn Xong ở góc trên bên phải để hoàn tất.';
+      'Nhấn \'Xong\' ở góc trên bên phải để hoàn thành';
 
   @override
-  String get guideStepLongPress => 'Chạm giữ trên Màn hình chính.';
+  String get guideTitle => 'Hướng dẫn thiết lập Widget';
 
   @override
-  String get guideStepSelectWidgets => 'Chọn "Widgets".';
+  String get guideSubtitle =>
+      'Làm theo các bước sau để thêm widget DearBox vào màn hình chính';
 
   @override
-  String get guideStepFindDearBox => 'Tìm "DearBox".';
-
-  @override
-  String get guideStepChooseStyle =>
-      'Chọn kiểu (Ghi chú hôm nay / Trích dẫn ngẫu nhiên).';
-
-  @override
-  String get guideStepTapAdd => 'Nhấn "Thêm".';
-
-  @override
-  String get guideStepPlaceAnywhere => 'Đặt ở bất cứ đâu bạn thích.';
-
-  @override
-  String get guideFooter => 'Hãy để DearBox làm ngày của bạn rực rỡ ✨';
+  String get guideFooter => 'Cần hỗ trợ? Liên hệ với chúng tôi để được giúp đỡ';
 
   @override
   String get done => 'Xong';
+
+  @override
+  String get selectLanguage => 'Chọn ngôn ngữ';
+
+  @override
+  String get selectLanguageSubtitle =>
+      'Chọn ngôn ngữ ưa thích của bạn để bắt đầu';
+
+  @override
+  String get continueButton => 'Tiếp tục';
 }

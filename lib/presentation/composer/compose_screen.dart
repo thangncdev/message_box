@@ -9,7 +9,9 @@ import 'package:message_box/presentation/composer/compose_controller.dart';
 import 'package:message_box/presentation/providers.dart';
 import 'package:message_box/presentation/widgets/base_screen.dart';
 import 'package:message_box/presentation/widgets/base_app_bar.dart';
+import 'package:message_box/presentation/widgets/widget_guide_modal.dart';
 import 'package:message_box/core/theme.dart';
+import 'package:message_box/services/shared_preferences_service.dart';
 
 class ComposeScreen extends ConsumerStatefulWidget {
   final String? messageId;
@@ -107,6 +109,9 @@ class _ComposeScreenState extends ConsumerState<ComposeScreen> {
                     ),
                   );
                   context.pop(true);
+                  ref
+                      .read(composeControllerProvider.notifier)
+                      .checkShowWidgetGuide(context);
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
@@ -197,7 +202,7 @@ class _ComposeScreenState extends ConsumerState<ComposeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    AppLocalizations.of(context)!.yourMessage,
+                    AppLocalizations.of(context)!.newMessage,
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       color: palette.onCard,
@@ -208,7 +213,6 @@ class _ComposeScreenState extends ConsumerState<ComposeScreen> {
                   Expanded(
                     child: TextField(
                       controller: _ctrl,
-                      autofocus: !isEdit,
                       maxLines: null,
                       minLines: 16,
                       onChanged: (v) {

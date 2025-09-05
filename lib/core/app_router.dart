@@ -7,7 +7,8 @@ import 'package:message_box/presentation/setting/setting_screen.dart';
 import 'package:message_box/presentation/more/more_screen.dart';
 import 'package:message_box/presentation/onboarding/onboarding_screen.dart';
 import 'package:message_box/presentation/guide/guide_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:message_box/presentation/language_selection/language_selection_screen.dart';
+import 'package:message_box/services/shared_preferences_service.dart';
 
 /// Centralized app router using go_router
 final Provider<GoRouter> appRouterProvider = Provider<GoRouter>((ref) {
@@ -50,6 +51,11 @@ final Provider<GoRouter> appRouterProvider = Provider<GoRouter>((ref) {
         },
       ),
       GoRoute(
+        path: '/language-selection',
+        name: 'language-selection',
+        builder: (context, state) => const LanguageSelectionScreen(),
+      ),
+      GoRoute(
         path: '/onboarding',
         name: 'onboarding',
         builder: (context, state) => const OnboardingScreen(),
@@ -61,12 +67,24 @@ final Provider<GoRouter> appRouterProvider = Provider<GoRouter>((ref) {
       ),
     ],
     redirect: (context, state) async {
-      final prefs = await SharedPreferences.getInstance();
-      final seen = prefs.getBool('seen_onboarding') ?? false;
-      final loggingInOnboarding = state.matchedLocation == '/onboarding';
-      if (!seen && !loggingInOnboarding) {
+      final prefsService = await SharedPreferencesService.getInstance();
+      final hasLanguage = prefsService.hasSelectedLanguage();
+      final seenOnboarding = prefsService.getSeenOnboarding();
+
+      final isOnLanguageSelection =
+          state.matchedLocation == '/language-selection';
+      final isOnOnboarding = state.matchedLocation == '/onboarding';
+
+      // If no language selected, go to language selection
+      if (!hasLanguage && !isOnLanguageSelection) {
+        return '/language-selection';
+      }
+
+      // If language selected but haven't seen onboarding, go to onboarding
+      if (hasLanguage && !seenOnboarding && !isOnOnboarding) {
         return '/onboarding';
       }
+
       return null;
     },
   );
