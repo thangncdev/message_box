@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:message_box/core/theme.dart';
 import 'package:message_box/l10n/app_localizations.dart';
+import 'package:message_box/services/shared_preferences_service.dart';
 
 class WidgetGuideModal extends StatelessWidget {
   const WidgetGuideModal({super.key});
@@ -85,7 +86,9 @@ class WidgetGuideModal extends StatelessWidget {
               width: double.infinity,
               height: 52,
               child: ElevatedButton(
-                onPressed: () {
+                onPressed:  () async {
+                  final prefsService = await SharedPreferencesService.getInstance();
+                  prefsService.setHasSeenWidgetGuide(true);
                   Navigator.of(context).pop(); // Close modal
                   context.push('/guide'); // Navigate to guide screen
                 },

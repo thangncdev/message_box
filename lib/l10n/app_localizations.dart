@@ -308,13 +308,13 @@ abstract class AppLocalizations {
   /// No description provided for @yourPersonalMessageBox.
   ///
   /// In en, this message translates to:
-  /// **'yourPersonalMessageBox'**
+  /// **'Note it. Own it'**
   String get yourPersonalMessageBox;
 
   /// No description provided for @makeChangesToYourMessage.
   ///
   /// In en, this message translates to:
-  /// **'makeChangesToYourMessage'**
+  /// **'Update your message'**
   String get makeChangesToYourMessage;
 
   /// No description provided for @widgetGuideTitle.
@@ -526,6 +526,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Continue'**
   String get continueButton;
+
+  /// No description provided for @suggestedMessages.
+  ///
+  /// In en, this message translates to:
+  /// **'Suggested Message'**
+  String get suggestedMessages;
+
+  /// No description provided for @guideSuggestedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'📌 You can refer to some available messages here'**
+  String get guideSuggestedMessage;
+
+  /// No description provided for @copiedClipboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Copied to clipboard'**
+  String get copiedClipboard;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

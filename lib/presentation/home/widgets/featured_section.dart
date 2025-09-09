@@ -61,7 +61,7 @@ class _PinnedDisplay extends StatelessWidget {
         onTap: () => context.push('/detail/${message.id}'),
         child: Container(
           decoration: BoxDecoration(
-            color: (palette?.pinnedBg) ?? const Color(0xFFFFF2C6),
+            color: (palette?.pinnedBg) ?? const Color(0xFFFFEDC2),
             borderRadius: BorderRadius.circular(24),
             border: Border.all(
               color: (palette?.borderColor) ?? const Color(0x14000000),
@@ -94,7 +94,9 @@ class _PinnedDisplay extends StatelessWidget {
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      isPinned ? 'Pinned' : 'Latest',
+                      isPinned
+                          ? AppLocalizations.of(context)!.pinned
+                          : AppLocalizations.of(context)!.newest,
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: palette?.accent,
                       ),

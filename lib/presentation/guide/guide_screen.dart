@@ -5,6 +5,9 @@ import 'package:message_box/core/theme.dart';
 import 'package:message_box/presentation/widgets/base_app_bar.dart';
 import 'package:message_box/presentation/widgets/base_screen.dart';
 import 'package:message_box/l10n/app_localizations.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+final telegramUsername = 'donkihotee';
 
 class GuideScreen extends StatelessWidget {
   const GuideScreen({super.key});
@@ -50,6 +53,17 @@ class GuideScreen extends StatelessWidget {
         AppImages.guide_5,
       ),
     ];
+
+    Future<void> _openTelegram() async {
+      final url = Uri.parse('tg://resolve?domain=$telegramUsername');
+      if (await canLaunchUrl(url)) {
+        await launchUrl(url, mode: LaunchMode.externalApplication);
+      } else {
+        // fallback to web version
+        final fallbackUrl = Uri.parse('https://t.me/$telegramUsername');
+        await launchUrl(fallbackUrl, mode: LaunchMode.externalApplication);
+      }
+    }
 
     return BaseScreen(
       appBar: GradientAppBar(
@@ -119,11 +133,15 @@ class GuideScreen extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Center(
-              child: Text(
-                t.guideFooter,
-                style: TextStyle(
-                  color: palette.onCard.withValues(alpha: 0.7),
-                  fontSize: 12,
+              child: TextButton(
+                onPressed: _openTelegram,
+                child: Text(
+                  t.guideFooter,
+                  style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    color: palette.onCard.withValues(alpha: 0.7),
+                    fontSize: 12,
+                  ),
                 ),
               ),
             ),

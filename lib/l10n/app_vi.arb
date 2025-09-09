@@ -34,8 +34,8 @@
   ,"justNow": "vừa xong",
   "minutesAgo": "phút trước",
   "hoursAgo": "giờ trước",
-  "yourPersonalMessageBox": "yourPersonalMessageBox",
-  "makeChangesToYourMessage":"makeChangesToYourMessage",
+  "yourPersonalMessageBox": "Note it. Own it",
+  "makeChangesToYourMessage":"Cập nhật lời nhắn của bạn",
   "widgetGuideTitle": "Hiển thị lời nhắn trên màn hình chính!",
   "widgetGuideDescription": "Bạn có thể thêm widget vào màn hình chính để xem nhanh lời nhắn mà không cần mở ứng dụng.",
   "widgetGuideButton": "Xem hướng dẫn",
@@ -47,7 +47,7 @@
   "introContent2": "Chỉnh sửa, ghim hoặc sắp xếp lời nhắn theo cách bạn muốn. Suy nghĩ của bạn, cách của bạn.",
   "introTitle3": "Widget trên màn hình chính",
   "introContent3": "Thêm widget vào màn hình chính để xem nhanh lời nhắn mà không cần mở ứng dụng.",
-  "more": "Thêm",
+  "more": "Tuỳ chọn",
   "settingsSubtitle": "Tùy chỉnh trải nghiệm của bạn",
   "widgetGuide": "Hướng dẫn Widget",
   "widgetGuideSubtitle": "Hướng dẫn thêm widget",
@@ -70,6 +70,9 @@
   "done": "Xong",
   "selectLanguage": "Chọn ngôn ngữ",
   "selectLanguageSubtitle": "Chọn ngôn ngữ ưa thích của bạn để bắt đầu",
-  "continueButton": "Tiếp tục"
+  "continueButton": "Tiếp tục",
+  "suggestedMessages": "Tin nhắn gợi ý",
+  "guideSuggestedMessage": "📌 Bạn có thể tham khảo một vài tin nhắn sẵn có ở đây",
+  "copiedClipboard": "Đã sao chép vào bộ nhớ tạm"
 }
 

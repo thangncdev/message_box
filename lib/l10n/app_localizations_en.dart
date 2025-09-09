@@ -63,8 +63,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get unpinned => 'Unpinned';
 
   @override
-  String get emptyFeaturedText =>
-      'Write a note you’d like to leave for yourself...';
+  String get emptyFeaturedText => 'Write a note you’d like to leave for yourself...';
 
   @override
   String get emptyFeaturedAction => 'Write your first message';
@@ -126,8 +125,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get widgetGuideTitle => 'Display your message on home screen!';
 
   @override
-  String get widgetGuideDescription =>
-      'You can add a widget to your home screen to quickly view your message without opening the app.';
+  String get widgetGuideDescription => 'You can add a widget to your home screen to quickly view your message without opening the app.';
 
   @override
   String get widgetGuideButton => 'View Guide';
@@ -139,24 +137,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get getStarted => 'Get Started';
 
   @override
-  String get introTitle1 => 'Dear Box';
+  String get introTitle1 => 'Your Personal Message Box';
 
   @override
-  String get introContent1 => 'A box for your thoughts 💌';
+  String get introContent1 => 'Create and store your personal messages, thoughts, and reminders in one secure place.';
 
   @override
-  String get introTitle2 => 'Write & Reflect';
+  String get introTitle2 => 'Make Changes to Your Message';
 
   @override
-  String get introContent2 =>
-      'Write your reminders, encouragement, or positive messages you want to send to yourself. ✍️';
+  String get introContent2 => 'Edit, pin, or organize your messages however you like. Your thoughts, your way.';
 
   @override
-  String get introTitle3 => 'Always by Your Side';
+  String get introTitle3 => 'Widget on Home Screen';
 
   @override
-  String get introContent3 =>
-      'Quickly view your message from your home screen and notification as a warm reminder every day ✨';
+  String get introContent3 => 'Add a widget to your home screen to quickly view your message without opening the app.';
 
   @override
   String get more => 'More';
@@ -189,39 +185,31 @@ class AppLocalizationsEn extends AppLocalizations {
   String get guideTitleIos => 'How to Add Widget';
 
   @override
-  String get guideStepIosJiggle =>
-      'Press and hold an empty area on the home screen until the apps start to jiggle';
+  String get guideStepIosJiggle => 'Long press on an empty area of your home screen until apps start jiggling';
 
   @override
-  String get guideStepIosTapPlus =>
-      'Tap the "Edit" button in the upper left corner of the screen\n Then tap the "Add Widget"';
+  String get guideStepIosTapPlus => 'Tap the + button in the top-left corner';
 
   @override
-  String get guideStepIosFindInGallery =>
-      'Search for \'DearBox\' in the widget gallery';
+  String get guideStepIosFindInGallery => 'Search for \'DearBox\' in the widget gallery';
 
   @override
-  String get guideStepIosChooseStyle =>
-      'Choose your preferred widget style and size';
+  String get guideStepIosChooseStyle => 'Choose your preferred widget style and size';
 
   @override
-  String get guideStepIosTapAddWidget =>
-      'Tap \'Add Widget\' to add it to your home screen';
+  String get guideStepIosTapAddWidget => 'Tap \'Add Widget\' to add it to your home screen';
 
   @override
-  String get guideStepIosDragPosition =>
-      'Drag the widget to your desired position';
+  String get guideStepIosDragPosition => 'Drag the widget to your desired position';
 
   @override
-  String get guideStepIosTapDone =>
-      'Tap \'Done\' in the top-right corner to finish';
+  String get guideStepIosTapDone => 'Tap \'Done\' in the top-right corner to finish';
 
   @override
   String get guideTitle => 'Widget Setup Guide';
 
   @override
-  String get guideSubtitle =>
-      'Follow these steps to add DearBox widget to your home screen';
+  String get guideSubtitle => 'Follow these steps to add DearBox widget to your home screen';
 
   @override
   String get guideFooter => 'Need help? Contact us for support';
@@ -233,9 +221,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get selectLanguage => 'Select Language';
 
   @override
-  String get selectLanguageSubtitle =>
-      'Choose your preferred language to get started';
+  String get selectLanguageSubtitle => 'Choose your preferred language to get started';
 
   @override
   String get continueButton => 'Continue';
+
+  @override
+  String get suggestedMessages => 'Suggested Message';
+
+  @override
+  String get guideSuggestedMessage => '📌 You can refer to some available messages here';
+
+  @override
+  String get copiedClipboard => 'Copied to clipboard';
 }

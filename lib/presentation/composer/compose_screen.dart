@@ -1,17 +1,18 @@
 import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:message_box/core/utils/date_format.dart';
 import 'package:message_box/constants/content.dart';
+import 'package:message_box/core/theme.dart';
+import 'package:message_box/core/utils/date_format.dart';
 import 'package:message_box/l10n/app_localizations.dart';
 import 'package:message_box/presentation/composer/compose_controller.dart';
 import 'package:message_box/presentation/providers.dart';
-import 'package:message_box/presentation/widgets/base_screen.dart';
 import 'package:message_box/presentation/widgets/base_app_bar.dart';
-import 'package:message_box/presentation/widgets/widget_guide_modal.dart';
-import 'package:message_box/core/theme.dart';
+import 'package:message_box/presentation/widgets/base_screen.dart';
 import 'package:message_box/services/shared_preferences_service.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 class ComposeScreen extends ConsumerStatefulWidget {
   final String? messageId;
@@ -25,6 +26,10 @@ class _ComposeScreenState extends ConsumerState<ComposeScreen> {
   final TextEditingController _ctrl = TextEditingController();
   bool _showValidationError = false;
   String? _placeholder;
+
+  late TutorialCoachMark tutorialCoachMark;
+  List<TargetFocus> targets = [];
+  GlobalKey suggestedButtonKey = GlobalKey();
 
   @override
   void didChangeDependencies() {
@@ -41,6 +46,8 @@ class _ComposeScreenState extends ConsumerState<ComposeScreen> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => showTutorial());
+
     _ctrl.addListener(() {
       if (mounted) setState(() {});
     });
@@ -63,6 +70,43 @@ class _ComposeScreenState extends ConsumerState<ComposeScreen> {
     super.dispose();
   }
 
+  void showTutorial() async {
+    final prefsService = await SharedPreferencesService.getInstance();
+    final hasSeenGuide = prefsService.getHasSeenSuggestedMessageGuide();
+
+    if (hasSeenGuide) {
+      return;
+    }
+
+    targets.add(
+      TargetFocus(
+        identify: "suggestedButton",
+        keyTarget: suggestedButtonKey,
+
+        contents: [
+          TargetContent(
+            align: ContentAlign.bottom,
+            child: Text(
+              AppLocalizations.of(context)!.guideSuggestedMessage,
+              style: TextStyle(color: Colors.white, fontSize: 18),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    tutorialCoachMark = TutorialCoachMark(
+      targets: targets,
+      textSkip: AppLocalizations.of(context)!.done,
+      paddingFocus: 8,
+    );
+
+    Future.delayed(const Duration(milliseconds: 500), () {
+      tutorialCoachMark.show(context: context);
+      prefsService.setHasSeenSuggestedMessageGuide(true);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final isEdit = widget.messageId != null;
@@ -75,65 +119,14 @@ class _ComposeScreenState extends ConsumerState<ComposeScreen> {
             : AppLocalizations.of(context)!.newMessage,
         style: AppBarStyle.gradient,
         actions: [
-          Container(
-            margin: const EdgeInsets.only(right: 8),
-            child: ElevatedButton.icon(
-              onPressed: () async {
-                final content = _ctrl.text.trim();
-                if (content.isEmpty) {
-                  setState(() {
-                    _showValidationError = true;
-                  });
-                  return;
-                }
-
-                bool success = false;
-                if (isEdit) {
-                  success = await ref
-                      .read(composeControllerProvider.notifier)
-                      .saveEdit(widget.messageId!);
-                } else {
-                  success = await ref
-                      .read(composeControllerProvider.notifier)
-                      .saveNew();
-                }
-                if (mounted && success) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        isEdit
-                            ? AppLocalizations.of(context)!.updated
-                            : AppLocalizations.of(context)!.saved,
-                      ),
-                      backgroundColor: palette.accent,
-                    ),
-                  );
-                  context.pop(true);
-                  ref
-                      .read(composeControllerProvider.notifier)
-                      .checkShowWidgetGuide(context);
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(AppLocalizations.of(context)!.errorTooLong),
-                    ),
-                  );
-                }
-              },
-              icon: const Icon(Icons.save, size: 18),
-              label: Text(AppLocalizations.of(context)!.save),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: palette.accent,
-                foregroundColor: Colors.white,
-                elevation: 2,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 8,
-                ),
-              ),
+          IconButton(
+            key: suggestedButtonKey,
+            onPressed: () {
+              context.pushNamed('suggestion-quotes');
+            },
+            icon: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(Icons.format_quote_rounded),
             ),
           ),
         ],
@@ -256,7 +249,6 @@ class _ComposeScreenState extends ConsumerState<ComposeScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const SizedBox.shrink(),
                       ValueListenableBuilder<TextEditingValue>(
                         valueListenable: _ctrl,
                         builder: (context, value, _) {
@@ -285,6 +277,67 @@ class _ComposeScreenState extends ConsumerState<ComposeScreen> {
                             ),
                           );
                         },
+                      ),
+
+                      ElevatedButton.icon(
+                        onPressed: () async {
+                          final content = _ctrl.text.trim();
+                          if (content.isEmpty) {
+                            setState(() {
+                              _showValidationError = true;
+                            });
+                            return;
+                          }
+
+                          bool success = false;
+                          if (isEdit) {
+                            success = await ref
+                                .read(composeControllerProvider.notifier)
+                                .saveEdit(widget.messageId!);
+                          } else {
+                            success = await ref
+                                .read(composeControllerProvider.notifier)
+                                .saveNew();
+                          }
+                          if (mounted && success) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  isEdit
+                                      ? AppLocalizations.of(context)!.updated
+                                      : AppLocalizations.of(context)!.saved,
+                                ),
+                                backgroundColor: palette.accent,
+                              ),
+                            );
+                            context.pop(true);
+                            ref
+                                .read(composeControllerProvider.notifier)
+                                .checkShowWidgetGuide(context);
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  AppLocalizations.of(context)!.errorTooLong,
+                                ),
+                              ),
+                            );
+                          }
+                        },
+                        icon: const Icon(Icons.save, size: 18),
+                        label: Text(AppLocalizations.of(context)!.save),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: palette.accent,
+                          foregroundColor: Colors.white,
+                          elevation: 2,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 8,
+                          ),
+                        ),
                       ),
                     ],
                   ),

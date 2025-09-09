@@ -8,7 +8,6 @@ class AppThemeKeys {
   static const String sky = 'sky';
   static const String honey = 'honey';
   static const String sand = 'sand';
-  static const String moss = 'moss';
   static const String rosewood = 'rosewood';
 }
 
@@ -91,7 +90,7 @@ PastelPalette _palette(String key) {
         searchFill: Color(0xFFFFEFE6),
         cardA: Color(0xFFFFF8F3),
         cardB: Color(0xFFFFE9E0),
-        pinnedBg: Color(0xFFFFE0C7),
+        pinnedBg: Color(0xFFFFEDC2),
         accent: Color(0xFFFF7043), // fresh coral
         onCard: Color(0xFF3E2C29),
         borderColor: Color(0x14000000),
@@ -104,7 +103,7 @@ PastelPalette _palette(String key) {
         searchFill: Color(0xFFD9F7ED),
         cardA: Color(0xFFF6FFFA),
         cardB: Color(0xFFEBFFF5),
-        pinnedBg: Color(0xFFDDF6E1),
+        pinnedBg: Color(0xFFFFEDC2),
         accent: Color(0xFF20BFA9), // aqua teal
         onCard: Color(0xFF224239),
         borderColor: Color(0x14000000),
@@ -117,7 +116,7 @@ PastelPalette _palette(String key) {
         searchFill: Color(0xFFD9EBFF),
         cardA: Color(0xFFF7FBFF),
         cardB: Color(0xFFE6F2FF),
-        pinnedBg: Color(0xFFCCE4FF),
+        pinnedBg: Color(0xFFFFEDC2),
         accent: Color(0xFF4A90E2), // soft vivid blue
         onCard: Color(0xFF2C3E55),
         borderColor: Color(0x14000000),
@@ -148,19 +147,6 @@ PastelPalette _palette(String key) {
         borderColor: Color(0x14000000), // border nhẹ
       );
 
-    case AppThemeKeys.moss:
-      return const PastelPalette(
-        gradientStart: Color(0xFFF2FFF9), // xanh nhạt
-        gradientEnd: Color(0xFFD9EFE2), // xanh moss pastel
-        searchFill: Color(0xFFE8F7ED),
-        cardA: Color(0xFFF8FFFA),
-        cardB: Color(0xFFEFFAF2),
-        pinnedBg: Color(0xFFDDEBCF), // highlight nhấn vàng-xanh
-        accent: Color(0xFF4CAF50), // xanh lá hiện đại
-        onCard: Color(0xFF2F3B30),
-        borderColor: Color(0x14000000),
-      );
-
     case AppThemeKeys.rosewood:
       return const PastelPalette(
         gradientStart: Color(0xFFFFF0F3), // hồng nhạt
@@ -182,7 +168,7 @@ PastelPalette _palette(String key) {
         searchFill: Color(0xFFEDE4FF),
         cardA: Color(0xFFF9F5FF),
         cardB: Color(0xFFEFE6FF),
-        pinnedBg: Color(0xFFE7DBFF),
+        pinnedBg: Color(0xFFFFEDC2),
         accent: Color(0xFF9C8CFF), // soft purple accent
         onCard: Color(0xFF362F4A),
         borderColor: Color(0x14000000),
@@ -236,6 +222,5 @@ const List<String> availableThemes = <String>[
   AppThemeKeys.sky,
   AppThemeKeys.honey,
   AppThemeKeys.sand,
-  AppThemeKeys.moss,
   AppThemeKeys.rosewood,
 ];

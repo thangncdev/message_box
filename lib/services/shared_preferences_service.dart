@@ -60,6 +60,21 @@ class SharedPreferencesService {
     return _prefs!.getBool(SharedPreferencesKeys.hasSeenWidgetGuide) ?? false;
   }
 
+  // Widget Guide
+  Future<bool> setHasSeenSuggestedMessageGuide(bool value) async {
+    return await _prefs!.setBool(
+      SharedPreferencesKeys.hasSeenSuggestedMessageGuide,
+      value,
+    );
+  }
+
+  bool getHasSeenSuggestedMessageGuide() {
+    return _prefs!.getBool(
+          SharedPreferencesKeys.hasSeenSuggestedMessageGuide,
+        ) ??
+        false;
+  }
+
   // Generic methods for other preferences
   Future<bool> setBool(String key, bool value) async {
     return await _prefs!.setBool(key, value);

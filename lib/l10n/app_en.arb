@@ -34,8 +34,8 @@
   "justNow": "just now",
   "minutesAgo": "min ago",
   "hoursAgo": "h ago",
-  "yourPersonalMessageBox": "yourPersonalMessageBox",
-  "makeChangesToYourMessage": "makeChangesToYourMessage",
+  "yourPersonalMessageBox": "Note it. Own it",
+  "makeChangesToYourMessage": "Update your message",
   "widgetGuideTitle": "Display your message on home screen!",
   "widgetGuideDescription": "You can add a widget to your home screen to quickly view your message without opening the app.",
   "widgetGuideButton": "View Guide",
@@ -70,7 +70,10 @@
   "done": "Done",
   "selectLanguage": "Select Language",
   "selectLanguageSubtitle": "Choose your preferred language to get started",
-  "continueButton": "Continue"
-
+  "continueButton": "Continue",
+  "suggestedMessages": "Suggested Message",
+  "guideSuggestedMessage": "📌 You can refer to some available messages here",
+  "copiedClipboard": "Copied to clipboard"
+  
 }
 

@@ -17,4 +17,6 @@ class SharedPreferencesKeys {
 
   // Widget Guide
   static const String hasSeenWidgetGuide = 'has_seen_widget_guide';
+  
+  static const String hasSeenSuggestedMessageGuide = 'has_seen_suggested_message_guide';
 }
