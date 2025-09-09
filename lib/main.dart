@@ -34,6 +34,7 @@ class DearBoxApp extends ConsumerWidget {
     }
 
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
       theme: buildAppTheme(appState.themeKey),
       routerConfig: router,

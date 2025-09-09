@@ -140,19 +140,19 @@ class AppLocalizationsVi extends AppLocalizations {
   String get introTitle1 => 'Dear Box';
 
   @override
-  String get introContent1 => 'Tạo và lưu trữ những lời nhắn, suy nghĩ và lời nhắc cá nhân của bạn ở một nơi an toàn.';
+  String get introContent1 => 'Hộp suy nghĩ của bạn';
 
   @override
-  String get introTitle2 => 'Thay đổi lời nhắn của bạn';
+  String get introTitle2 => 'Viết & Cảm nhận';
 
   @override
-  String get introContent2 => 'Chỉnh sửa, ghim hoặc sắp xếp lời nhắn theo cách bạn muốn. Suy nghĩ của bạn, cách của bạn.';
+  String get introContent2 => 'Viết lại những lời nhắc nhở, khích lệ hoặc những điều tốt đẹp mà bạn muốn gửi cho chính mình';
 
   @override
-  String get introTitle3 => 'Widget trên màn hình chính';
+  String get introTitle3 => 'Luôn bên cạnh bạn';
 
   @override
-  String get introContent3 => 'Thêm widget vào màn hình chính để xem nhanh lời nhắn mà không cần mở ứng dụng.';
+  String get introContent3 => 'Dễ dàng xem từ màn hình chính và thông báo như một lời nhắc nhở ấm áp mỗi ngày';
 
   @override
   String get more => 'Tuỳ chọn';
@@ -188,7 +188,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get guideStepIosJiggle => 'Nhấn giữ vào vùng trống trên màn hình chính cho đến khi các ứng dụng bắt đầu rung lắc';
 
   @override
-  String get guideStepIosTapPlus => 'Nhấn vào nút + ở góc trên bên trái';
+  String get guideStepIosTapPlus => 'Nhấn vào nút \'Sửa\' ở góc trên bên trái màn hình\n Sau đó chọn \'Thêm tiện ích\'';
 
   @override
   String get guideStepIosFindInGallery => 'Tìm kiếm \'DearBox\' trong thư viện widget';
@@ -197,7 +197,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get guideStepIosChooseStyle => 'Chọn kiểu và kích thước widget bạn muốn';
 
   @override
-  String get guideStepIosTapAddWidget => 'Nhấn \'Thêm Widget\' để thêm vào màn hình chính';
+  String get guideStepIosTapAddWidget => 'Nhấn \'Thêm tiện ích\' để thêm vào màn hình chính';
 
   @override
   String get guideStepIosDragPosition => 'Kéo widget đến vị trí mong muốn';

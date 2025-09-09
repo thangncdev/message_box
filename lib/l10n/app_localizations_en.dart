@@ -137,22 +137,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get getStarted => 'Get Started';
 
   @override
-  String get introTitle1 => 'Your Personal Message Box';
+  String get introTitle1 => 'Dear Box';
 
   @override
-  String get introContent1 => 'Create and store your personal messages, thoughts, and reminders in one secure place.';
+  String get introContent1 => 'A box for your thoughts';
 
   @override
-  String get introTitle2 => 'Make Changes to Your Message';
+  String get introTitle2 => 'Write & Reflect';
 
   @override
-  String get introContent2 => 'Edit, pin, or organize your messages however you like. Your thoughts, your way.';
+  String get introContent2 => 'Write your reminders, encouragement, or positive messages you want to send to yourself.';
 
   @override
-  String get introTitle3 => 'Widget on Home Screen';
+  String get introTitle3 => 'Always by Your Side';
 
   @override
-  String get introContent3 => 'Add a widget to your home screen to quickly view your message without opening the app.';
+  String get introContent3 => 'Quickly view your message from your home screen and notification as a warm reminder every day';
 
   @override
   String get more => 'More';

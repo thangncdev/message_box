@@ -350,37 +350,37 @@ abstract class AppLocalizations {
   /// No description provided for @introTitle1.
   ///
   /// In en, this message translates to:
-  /// **'Your Personal Message Box'**
+  /// **'Dear Box'**
   String get introTitle1;
 
   /// No description provided for @introContent1.
   ///
   /// In en, this message translates to:
-  /// **'Create and store your personal messages, thoughts, and reminders in one secure place.'**
+  /// **'A box for your thoughts'**
   String get introContent1;
 
   /// No description provided for @introTitle2.
   ///
   /// In en, this message translates to:
-  /// **'Make Changes to Your Message'**
+  /// **'Write & Reflect'**
   String get introTitle2;
 
   /// No description provided for @introContent2.
   ///
   /// In en, this message translates to:
-  /// **'Edit, pin, or organize your messages however you like. Your thoughts, your way.'**
+  /// **'Write your reminders, encouragement, or positive messages you want to send to yourself.'**
   String get introContent2;
 
   /// No description provided for @introTitle3.
   ///
   /// In en, this message translates to:
-  /// **'Widget on Home Screen'**
+  /// **'Always by Your Side'**
   String get introTitle3;
 
   /// No description provided for @introContent3.
   ///
   /// In en, this message translates to:
-  /// **'Add a widget to your home screen to quickly view your message without opening the app.'**
+  /// **'Quickly view your message from your home screen and notification as a warm reminder every day'**
   String get introContent3;
 
   /// No description provided for @more.
