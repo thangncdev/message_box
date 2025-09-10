@@ -1,4 +1,4 @@
-package com.example.message_box
+package com.thangnc.dearbox
 
 import io.flutter.embedding.android.FlutterActivity
 
