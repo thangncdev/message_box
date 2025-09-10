@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/widget_container"
     style="@style/Widget.Android.AppWidget.Container"
+    android:background="@drawable/widget_bg"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
     android:theme="@style/Theme.Android.AppWidgetContainer">
 
 
@@ -20,7 +20,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="4dp"
         android:background="@android:color/white"
-        android:text="Title"
+        android:text=""
         android:textSize="16sp" />
 
 </RelativeLayout>

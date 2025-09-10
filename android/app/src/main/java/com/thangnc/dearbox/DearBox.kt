@@ -1,5 +1,6 @@
 package com.thangnc.dearbox
 
+import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
@@ -44,6 +45,17 @@ internal fun updateAppWidget(
         setTextViewText(R.id.message, message ?: "No message")
     }
 
+    // Intent để mở app khi click
+            val intent = context.packageManager.getLaunchIntentForPackage(context.packageName)
+            val pendingIntent = PendingIntent.getActivity(
+                context,
+                0,
+                intent,
+                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+            )
+
+            // Gắn click cho một view trong layout (ví dụ toàn bộ widget)
+            views.setOnClickPendingIntent(R.id.widget_container, pendingIntent)
     // Instruct the widget manager to update the widget
     appWidgetManager.updateAppWidget(appWidgetId, views)
 }
