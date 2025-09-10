@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:message_box/l10n/app_localizations.dart';
 import 'package:message_box/presentation/providers.dart';
 import 'package:message_box/presentation/widgets/base_app_bar.dart';
 import 'package:message_box/presentation/widgets/base_screen.dart';
-import 'package:flutter/services.dart';
-import 'package:message_box/l10n/app_localizations.dart';
 
 // Quotes in English + Vietnamese (3 per category)
 // Categories + Quotes with EN + VI
@@ -24,6 +23,16 @@ quotesByCategory = const {
       "en": "Do what you can, with what you have, where you are.",
       "vi":
           "Hãy làm những gì bạn có thể, với những gì bạn có, ở nơi bạn đang đứng.",
+    },
+    {
+      "en":
+          "The only difference between a good day and a bad day is your attitude.",
+      "vi":
+          "Sự khác biệt giữa một ngày tuyệt vời và một ngày tệ là ở suy nghĩ và góc nhìn của bạn.",
+    },
+    {
+      "en": "If you can dream it, you can do it",
+      "vi": "Nếu bạn có thể mơ, bạn có thể làm được.",
     },
   ],
   {"en": "💪 Courage & Resilience", "vi": "💪 Dũng cảm & Kiên cường"}: [
@@ -54,6 +63,10 @@ quotesByCategory = const {
           "Do not go where the path may lead, go instead where there is no path and leave a trail.",
       "vi":
           "Đừng đi theo con đường có sẵn, hãy đi nơi chưa có đường và để lại dấu vết.",
+    },
+    {
+      "en": "Life is short, do not waste it on meaningless things",
+      "vi": "Cuộc đời ngắn ngủi, đừng lãng phí nó vào những điều vô nghĩa",
     },
   ],
   {"en": "🌍 Inspiration & Legacy", "vi": "🌍 Truyền cảm hứng & Di sản"}: [
